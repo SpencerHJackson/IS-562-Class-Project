@@ -26,8 +26,10 @@ resource "aws_instance" "project1_ec2_webserver" {
       yum install -y python3-pip
       python3 -m pip install --upgrade pip
       pip install django==3.2
-      service httpd start
-      systemctl enable httpd
+      pip install python-dotenv
+      pip install gunicorn
+      pip install virtualenv
+      pip install whitenoise
       cd /home/ec2-user
       wget https://aws-codedeploy-us-east-2.s3.us-east-2.amazonaws.com/latest/install
       chmod +x ./install
