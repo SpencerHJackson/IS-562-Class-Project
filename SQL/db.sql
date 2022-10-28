@@ -20,7 +20,7 @@ CREATE TABLE `students` (
   `lastpayincrease` varchar(255),
   `payincreaseamount` decimal(5,2) default NULL,
   `increaseinputdate` varchar(255),
-  `yearinprogram` varchar(255) default NULL
+  `yearinprogram` varchar(255) default NULL,
   `paygradtuition` varchar(255) default NULL,
   `isterminated` varchar(255) default NULL,
   `terminateddate` varchar(255),
