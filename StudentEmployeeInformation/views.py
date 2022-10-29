@@ -1,4 +1,5 @@
 from email.mime.text import MIMEText
+from django.http import HttpResponse
 import smtplib
 import ssl
 from django.shortcuts import render
@@ -7,16 +8,18 @@ from django.shortcuts import render
 def indexPageView(request):
     return render(request, 'StudentEmployeeInformation/index.html')
 
-def send_email(self, subject, text):
+def send_email(request):
     port = 465
     account = 'is405project@gmail.com'
     password = 'zacmtgcrbbndquhm'
-    recipient = 'spencerhyrumjackson@gmail.com'
+    recipient = request.POST.get('recipient')
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
       server.login(account, password)
-      message = text
+      message = request.POST.get('text')
       msg = MIMEText(message)
-      msg['Subject'] = subject
+      msg['Subject'] = request.POST.get('subject')
       msg['To'] = recipient
       server.sendmail(account,recipient,msg.as_string())
+
+    return HttpResponse("Email was sent!")
