@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Student Employee{% endblock %}
+
+{% block content %}
+
+{% comment %} <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -15,11 +22,11 @@
       src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
       crossorigin="anonymous"
     ></script>
-  </head>
+  </head> 
   <body class="bg-primary">
     <div id="layoutAuthentication">
       <div id="layoutAuthentication_content">
-        <main>
+        <main> {% endcomment %}
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-7">
@@ -28,7 +35,9 @@
                     <h3 class="text-center font-weight-light my-4">Add User</h3>
                   </div>
                   <div class="card-body">
-                    <form>
+
+                    <form name="addEmployee" method="post" action="{% url 'storeStudentEmployee' %}">
+                      {% csrf_token %}
                       <div class="row mb-3">
                         <h3 class="text-center my-4">Student Personal Information</h3>
                         <div class="col-md-6">
@@ -470,7 +479,9 @@
                           rows="3"
                         ></textarea>
                       </div>
+                      <button type="submit">Add Employee</button>
                     </form>
+
                   </div>
                   <div class="card-footer text-center py-3">
                     <div class="small">
@@ -481,7 +492,7 @@
               </div>
             </div>
           </div>
-        </main>
+        {% comment %} </main>
       </div>
       <div id="layoutAuthentication_footer">
         <footer class="py-4 bg-light mt-auto">
@@ -506,4 +517,6 @@
     ></script>
     <script src="js/scripts.js"></script>
   </body>
-</html>
+</html> {% endcomment %}
+
+{% endblock %}

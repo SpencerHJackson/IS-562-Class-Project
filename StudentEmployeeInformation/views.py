@@ -4,9 +4,23 @@ import smtplib
 import ssl
 from django.shortcuts import render
 
+from StudentEmployeeInformation.models import Students
+
 # Create your views here.
 def indexPageView(request):
     return render(request, 'StudentEmployeeInformation/index.html')
+
+def addStudentEmployeeFormPageView(request):
+    return render(request, 'StudentEmployeeInformation/add-user.html')
+
+def storeStudentEmployeePageView(request):
+  if request.method=='POST':
+    new_employee=Students()
+    new_employee.first_name = request.POST.get('inputFirstName')
+
+    new_employee.save()
+
+  return render(request, 'StudentEmployeeInformation/index.html')
 
 def send_email(request):
     port = 465
