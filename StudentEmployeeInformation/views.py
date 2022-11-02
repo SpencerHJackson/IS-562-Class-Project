@@ -8,7 +8,14 @@ from StudentEmployeeInformation.models import Students
 
 # Create your views here.
 def indexPageView(request):
-    return render(request, 'StudentEmployeeInformation/index.html')
+
+  studentRecords = Students.objects.all()
+
+  context = {
+    'studentRecords' : studentRecords,
+  }
+
+  return render(request, 'StudentEmployeeInformation/index.html', context)
 
 def addStudentEmployeeFormPageView(request):
     return render(request, 'StudentEmployeeInformation/add-user.html')
