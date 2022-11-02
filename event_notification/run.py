@@ -50,14 +50,15 @@ class Db:
           email_id_list.append(x)
           tracker[x] = 0
       
-      email_text = ""
-      df_filterd_email = df_query[df_query.id.isin(email_id_list)]
-      for index, row in df_filterd_email.iterrows():
-        temp_fistname = df_filterd_email.loc[index, 'first_name']
-        temp_lastname = df_filterd_email.loc[index, 'last_name']
-        temp_byuid = df_filterd_email.loc[index, 'byuid']
-        email_text += temp_byuid + ": " + temp_fistname + " " + temp_lastname + "\n"
-      self.send_email(subject=subject, text=email_text)
+      if len(email_id_list) > 0:
+        email_text = ""
+        df_filterd_email = df_query[df_query.id.isin(email_id_list)]
+        for index, row in df_filterd_email.iterrows():
+          temp_fistname = df_filterd_email.loc[index, 'first_name']
+          temp_lastname = df_filterd_email.loc[index, 'last_name']
+          temp_byuid = df_filterd_email.loc[index, 'byuid']
+          email_text += temp_byuid + ": " + temp_fistname + " " + temp_lastname + "\n"
+        self.send_email(subject=subject, text=email_text)
       with open(file_path, "w") as outfile:
         outfile.write(json.dumps(tracker))
 
