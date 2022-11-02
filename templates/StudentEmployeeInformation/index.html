@@ -10,14 +10,14 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Dashboard</li>
     </ol>
-    <form action="{% url 'sendEmail' %}" method="post">
+    {% comment %} <form action="{% url 'sendEmail' %}" method="post">
         {% csrf_token %}
         <input name="recipient" type="text" placeholder="Enter the recipient email">
-        <input name="subject" type="hidden" value="Test Email">
-        <input name="text" type="hidden" value="This email verifies that the send email feature worked!">
+        <input name="messageSubject" type="hidden" value="Test Email">
+        <input name="messageText" type="hidden" value="This email verifies that the send email feature worked!">
         <br><br>
         <button type="submit" class="btn btn-info">Send Test Email</button>
-    </form><br>
+    </form><br> {% endcomment %}
     <a class="btn btn-success" href="{% url 'addStudentEmployeeForm' %}">Add New Student Employee</a>
     <div class="row">
         <div class='tableauPlaceholder' id='viz1667258404049' style='position: relative'>
