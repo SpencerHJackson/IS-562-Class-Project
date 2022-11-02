@@ -46,6 +46,7 @@ def storeStudentEmployeePageView(request):
 
 # Some of these are off. We need to verify the fields we are entering are correct
     new_employee.save()
+    send_email(request)
 
   return render(request, 'StudentEmployeeInformation/index.html')
 
@@ -53,14 +54,12 @@ def send_email(request):
     port = 465
     account = 'is405project@gmail.com'
     password = 'zacmtgcrbbndquhm'
-    recipient = request.POST.get('recipient')
+    recipient = request.POST.get('inputEmail')
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
       server.login(account, password)
-      message = request.POST.get('text')
+      message = request.POST.get('messageText')
       msg = MIMEText(message)
-      msg['Subject'] = request.POST.get('subject')
+      msg['Subject'] = request.POST.get('messageSubject')
       msg['To'] = recipient
       server.sendmail(account,recipient,msg.as_string())
-
-    return HttpResponse("Email was sent!")
