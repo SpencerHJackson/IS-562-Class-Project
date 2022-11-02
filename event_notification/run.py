@@ -39,10 +39,10 @@ class Db:
         tracker = json.load(json_file)
 
       for id in df_query['id']:
-        if id in tracker:
-          tracker[id] += 1
+        if str(id) in tracker:
+          tracker[str(id)] += 1
         else:
-          tracker[id] = 1
+          tracker[str(id)] = 1
 
       email_id_list = []
       for x in tracker:
@@ -52,7 +52,7 @@ class Db:
       
       if len(email_id_list) > 0:
         email_text = ""
-        df_filterd_email = df_query[df_query.id.isin(email_id_list)]
+        df_filterd_email = df_query[df_query.id.isin([int(x) for x in email_id_list])]
         for index, row in df_filterd_email.iterrows():
           temp_fistname = df_filterd_email.loc[index, 'first_name']
           temp_lastname = df_filterd_email.loc[index, 'last_name']
