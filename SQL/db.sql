@@ -25,7 +25,7 @@ CREATE TABLE `students` (
   `isterminated` tinyint(1),
   `terminateddate` varchar(255),
   `qualtricssent` tinyint(1),
-  `eform` varchar(255) default NULL,
+  `eform` tinyint(1),
   `eformdate` varchar(255),
   `workauth` tinyint(1),
   `workauthdate` varchar(255),
