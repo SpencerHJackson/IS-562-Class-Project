@@ -112,25 +112,25 @@
                     <tr>
                         <th>Name</th>
                         <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
+                        <th>Class Code</th>
+                        <th>Supervisor</th>
+                        <th>Hire Date</th>
                         <th>Salary</th>
                         <th>More Info</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    {% for x in studentRecords %}
                     <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
+                        <td>{{ x.first_name }} {{x.last_name}}</td>
+                        <td>{{x.position}}</td>
+                        <td>{{x.class_code}}</td>
+                        <td>{{x.supervisor}}</td>
+                        <td>{{x.hiredate}}</td>
+                        <td>{{x.payrate}}</td>
                         <td><button type="submit">View/Edit</button></td>
                     </tr>
-                    
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
