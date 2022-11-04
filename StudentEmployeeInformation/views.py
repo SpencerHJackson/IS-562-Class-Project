@@ -70,3 +70,7 @@ def send_email(request):
       msg['Subject'] = request.POST.get('messageSubject')
       msg['To'] = recipient
       server.sendmail(account,recipient,msg.as_string())
+
+def tableauView(request):
+    return render(request, 'StudentEmployeeInformation/tableau.html')
+
