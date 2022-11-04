@@ -119,6 +119,8 @@ class Student(models.Model):
     ta_history = models.ManyToManyField(ClassSection, blank=True)
     ra_history = models.ManyToManyField(ResearchSection, blank=True)
     boolean_value = models.BooleanField(blank=True, null=True)
+    expected_hours = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    byu_name = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         db_table = 'student_employee'
@@ -126,4 +128,3 @@ class Student(models.Model):
 
     def __str__(self):
         return(str(self.last_name) + ", " + str(self.first_name))
-        
