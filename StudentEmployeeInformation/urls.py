@@ -8,5 +8,6 @@ urlpatterns = [
     path('sendEmail/', send_email, name="sendEmail"),
     path('searchbyuid/', search_byuid, name="searchbyuid"),
     path('editrecord/', edit_record, name="editrecord"),
-    path('saverecord/', save_record, name="saverecord")
+    path('saverecord/', save_record, name="saverecord"),
+    path('tableau/', tableauView, name="TableauGraphs")
 ]
