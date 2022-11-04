@@ -118,7 +118,6 @@ class Student(models.Model):
     workauth_date = models.DateField(blank=True, null=True)
     ta_history = models.ManyToManyField(ClassSection, blank=True)
     ra_history = models.ManyToManyField(ResearchSection, blank=True)
-    boolean_value = models.BooleanField(blank=True, null=True)
     expected_hours = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     byu_name = models.CharField(max_length=255, blank=True, null=True)
 
