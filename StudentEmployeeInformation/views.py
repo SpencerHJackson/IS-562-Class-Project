@@ -6,12 +6,12 @@ from django.shortcuts import render
 import mysql.connector
 import pandas as pd
 
-from StudentEmployeeInformation.models import Students
+from StudentEmployeeInformation.models import Student
 
 # Create your views here.
 def indexPageView(request):
 
-  studentRecords = Students.objects.all()
+  studentRecords = Student.objects.all()
 
   context = {
     'studentRecords' : studentRecords,
@@ -24,34 +24,34 @@ def addStudentEmployeeFormPageView(request):
 
 def storeStudentEmployeePageView(request):
   if request.method=='POST':
-    new_employee=Students()
+    new_employee=Student()
     new_employee.first_name = request.POST.get('inputFirstName')
     new_employee.last_name = request.POST.get('inputLastName')
-    new_employee.international = request.POST.get('international')
+    new_employee.international_student = request.POST.get('international')
     new_employee.gender = request.POST.get('gender')
     new_employee.email = request.POST.get('inputEmail')
-    new_employee.semester = request.POST.get('semester')
-    new_employee.calendaryear = request.POST.get('year')
+    #new_employee.semester = request.POST.get('semester') This will be replaced
+    #new_employee.calendar_year = request.POST.get('year') This will be replaced
     new_employee.phone = request.POST.get('phoneNumber')
-    new_employee.byuid = request.POST.get('BYUID')
-    new_employee.position = request.POST.get('positionType')
-    new_employee.class_code = request.POST.get('classCode')
+    new_employee.byu_id = request.POST.get('BYUID')
+    #new_employee.position = request.POST.get('positionType') changed
+    #new_employee.class_code = request.POST.get('classCode') this will be replaced
     new_employee.employee_record = request.POST.get('employeeRecord')
-    new_employee.supervisor = request.POST.get('inputFirstName')
-    new_employee.hiredate = request.POST.get('hireDate')
-    new_employee.payrate = request.POST.get('payRate')
-    new_employee.lastpayincrease = request.POST.get('lastPayRaise')
-    new_employee.payincreaseamount = request.POST.get('payRateIncrease')
-    new_employee.increaseinputdate = request.POST.get('inputFirstName')
-    new_employee.yearinprogram = request.POST.get('yearInProgram')
-    new_employee.paygradtuition = request.POST.get('paidTuition')
-    new_employee.isterminated = request.POST.get('Terminated')
-    new_employee.terminateddate = request.POST.get('terminatedDate')
-    new_employee.qualtricssent = request.POST.get('qualtrics')
+    #new_employee.supervisor = request.POST.get('inputFirstName') changed
+    new_employee.hire_date = request.POST.get('hireDate')
+    new_employee.pay_rate = request.POST.get('payRate')
+    new_employee.last_pay_increase = request.POST.get('lastPayRaise')
+    new_employee.pay_increase_amount = request.POST.get('payRateIncrease')
+    new_employee.increase_input_date = request.POST.get('inputFirstName')
+    #new_employee.year_in_program = request.POST.get('yearInProgram') changed
+    new_employee.pay_grad_tuition = request.POST.get('paidTuition')
+    new_employee.is_terminated = request.POST.get('Terminated')
+    new_employee.terminated_date = request.POST.get('terminatedDate')
+    new_employee.qualtrics_sent = request.POST.get('qualtrics')
     new_employee.eform = request.POST.get('eForm')
-    new_employee.eformdate = request.POST.get('inputFirstName')
+    new_employee.eform_date = request.POST.get('inputFirstName')
     new_employee.workauth = request.POST.get('authorized')
-    new_employee.workauthdate = request.POST.get('authSent')
+    new_employee.workauth_date = request.POST.get('authSent')
 
 # Some of these are off. We need to verify the fields we are entering are correct
     new_employee.save()
@@ -94,46 +94,46 @@ def edit_record(request):
     target_record['lastpayincrease'] = str(target_record['lastpayincrease'])
     target_record['workauthdate'] = str(target_record['workauthdate'])
     target_record['terminateddate'] = str(target_record['terminateddate']) if target_record['terminateddate'] is not None else '0000-00-00'
-    target_record['semester'] = '' if target_record['semester'] is None else target_record['semester'] 
-    target_record['calendaryear'] = '' if target_record['calendaryear'] is None else target_record['calendaryear'] 
+    #target_record['semester'] = '' if target_record['semester'] is None else target_record['semester'] 
+    #target_record['calendaryear'] = '' if target_record['calendaryear'] is None else target_record['calendaryear'] 
     target_record['gender'] = '' if target_record['gender'] is None else target_record['gender'] 
     target_record['yearinprogram'] = '' if target_record['yearinprogram'] is None else target_record['yearinprogram']
-    target_record['class_code'] = '' if target_record['class_code'] is None else target_record['class_code']
+    #target_record['class_code'] = '' if target_record['class_code'] is None else target_record['class_code']
     target_record['employee_record'] = '' if target_record['employee_record'] is None else target_record['employee_record']
-    target_record['position'] = '' if target_record['position'] is None else target_record['position']
+    #target_record['position'] = '' if target_record['position'] is None else target_record['position'] changed
     return render(request, 'StudentEmployeeInformation/edit-user.html', target_record)
 
 def save_record(request):
   print(request.POST.get('BYUID'))
   df_query = query(f"SELECT id FROM BYUIS.students where byuid = '{request.POST.get('BYUID')}';")
-  target_record = Students.objects.get(byuid=request.POST.get('BYUID'))
+  target_record = Student.objects.get(byuid=request.POST.get('BYUID'))
   target_record.first_name = request.POST.get('inputFirstName')
   target_record.last_name = request.POST.get('inputLastName')
-  target_record.international = request.POST.get('international')
+  target_record.international_student = request.POST.get('international')
   target_record.gender = request.POST.get('gender')
   target_record.email = request.POST.get('inputEmail')
-  target_record.semester = request.POST.get('semester')
-  target_record.calendaryear = request.POST.get('year')
+  #target_record.semester = request.POST.get('semester')
+  #target_record.calendar_year = request.POST.get('year')
   target_record.phone = request.POST.get('phoneNumber')
-  target_record.byuid = request.POST.get('BYUID')
-  target_record.position = request.POST.get('positionType')
-  target_record.class_code = request.POST.get('classCode')
+  target_record.byu_id = request.POST.get('BYUID')
+  #target_record.position = request.POST.get('positionType') changed
+  #target_record.class_code = request.POST.get('classCode')
   target_record.employee_record = request.POST.get('employeeRecord')
-  target_record.supervisor = request.POST.get('inputFirstName')
-  target_record.hiredate = request.POST.get('hireDate')
-  target_record.payrate = request.POST.get('payRate')
-  target_record.lastpayincrease = request.POST.get('lastPayRaise')
-  target_record.payincreaseamount = request.POST.get('payRateIncrease')
-  target_record.increaseinputdate = request.POST.get('inputFirstName')
-  target_record.yearinprogram = request.POST.get('yearInProgram')
-  target_record.paygradtuition = request.POST.get('paidTuition')
-  target_record.isterminated = request.POST.get('Terminated')
-  target_record.terminateddate = request.POST.get('terminatedDate')
-  target_record.qualtricssent = request.POST.get('qualtrics')
+  #target_record.supervisor = request.POST.get('inputFirstName') changed
+  target_record.hire_date = request.POST.get('hireDate')
+  target_record.pay_rate = request.POST.get('payRate')
+  target_record.last_pay_increase = request.POST.get('lastPayRaise')
+  target_record.pay_increase_amount = request.POST.get('payRateIncrease')
+  target_record.increase_input_date = request.POST.get('inputFirstName')
+  #target_record.year_in_program = request.POST.get('yearInProgram') changed
+  target_record.pay_grad_tuition = request.POST.get('paidTuition')
+  target_record.is_terminated = request.POST.get('Terminated')
+  target_record.terminated_date = request.POST.get('terminatedDate')
+  target_record.qualtrics_sent = request.POST.get('qualtrics')
   target_record.eform = request.POST.get('eForm')
-  target_record.eformdate = request.POST.get('inputFirstName')
+  target_record.eform_date = request.POST.get('inputFirstName')
   target_record.workauth = request.POST.get('authorized')
-  target_record.workauthdate = request.POST.get('authSent')
+  target_record.workauth_date = request.POST.get('authSent')
 
 # Some of these are off. We need to verify the fields we are entering are correct
   target_record.save()
