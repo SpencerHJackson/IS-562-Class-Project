@@ -86,59 +86,73 @@ def search_byuid(request):
   return render(request, 'StudentEmployeeInformation/search_byuid.html')
 
 def edit_record(request):
-  df_query = query(f"SELECT * FROM BYUIS.students where byuid = '{request.POST.get('byuid')}';")
+  df_query = query(f"SELECT * FROM BYUIS.student_employee where byu_id = '{request.POST.get('byuid')}';")
   if len(df_query) < 1:
     text = {}
     text['alert'] = f"We don't have any student with BYU ID: {request.POST.get('byuid')}"
     return render(request, 'StudentEmployeeInformation/search_byuid.html', text)
   else:
     target_record = df_query.iloc[0].to_dict()
-    target_record['calendaryear'] = target_record['calendaryear'][0:4]
-    target_record['hiredate'] = str(target_record['hiredate'])
-    target_record['lastpayincrease'] = str(target_record['lastpayincrease'])
-    target_record['workauthdate'] = str(target_record['workauthdate'])
-    target_record['terminateddate'] = str(target_record['terminateddate']) if target_record['terminateddate'] is not None else '0000-00-00'
-    #target_record['semester'] = '' if target_record['semester'] is None else target_record['semester'] 
-    #target_record['calendaryear'] = '' if target_record['calendaryear'] is None else target_record['calendaryear'] 
+    target_record['phone'] = str(target_record['phone']) if target_record['phone'] is not None else 'xxx-xxx-xxxx'
+    target_record['hire_date'] = str(target_record['hire_date']) if target_record['hire_date'] is not None else '0001-01-01'
+    target_record['last_pay_increase'] = str(target_record['last_pay_increase']) if target_record['last_pay_increase'] is not None else '0001-01-01'
+    target_record['pay_rate'] = str(target_record['pay_rate']) if target_record['pay_rate'] is not None else '0'
+    target_record['pay_increase_amount'] = str(target_record['pay_increase_amount']) if target_record['pay_increase_amount'] is not None else '0'
+    target_record['workauth_date'] = str(target_record['workauth_date']) if target_record['workauth_date'] is not None else '0001-01-01'
+    target_record['terminated_date'] = str(target_record['terminated_date']) if target_record['terminated_date'] is not None else '0001-01-01'
     target_record['gender'] = '' if target_record['gender'] is None else target_record['gender'] 
-    target_record['yearinprogram'] = '' if target_record['yearinprogram'] is None else target_record['yearinprogram']
-    #target_record['class_code'] = '' if target_record['class_code'] is None else target_record['class_code']
     target_record['employee_record'] = '' if target_record['employee_record'] is None else target_record['employee_record']
-    #target_record['position'] = '' if target_record['position'] is None else target_record['position'] changed
+    if target_record['position_id'] == 1:
+      target_record['position_id'] = 'TA'
+    elif target_record['position_id'] == 2:
+      target_record['position_id'] = 'RA'
+    elif target_record['position_id'] == 3:
+      target_record['position_id'] = 'Office'
+    elif target_record['position_id'] == 4:
+      target_record['position_id'] = 'Student Instructor'
+    elif target_record['position_id'] == 5:
+      target_record['position_id'] = 'Other'
+    else:
+      target_record['position_id'] = ''
+    
+    if target_record['year_in_program_id'] == 1:
+      target_record['year_in_program_id'] = 'MISM'
+    elif target_record['year_in_program_id'] == 2:
+      target_record['year_in_program_id'] = 'MBA'
+    elif target_record['year_in_program_id'] == 3:
+      target_record['year_in_program_id'] = 'MPA'
+    elif target_record['year_in_program_id'] == 4:
+      target_record['year_in_program_id'] = 'MAcc'
+    elif target_record['year_in_program_id'] == 5:
+      target_record['year_in_program_id'] = 'Other Major'
+    else:
+      target_record['year_in_program_id'] = ''
+
     return render(request, 'StudentEmployeeInformation/edit-user.html', target_record)
 
 def save_record(request):
-  print(request.POST.get('BYUID'))
-  df_query = query(f"SELECT id FROM BYUIS.students where byuid = '{request.POST.get('BYUID')}';")
-  target_record = Student.objects.get(byuid=request.POST.get('BYUID'))
+  target_record = Student.objects.get(byu_id=request.POST.get('BYUID'))
   target_record.first_name = request.POST.get('inputFirstName')
   target_record.last_name = request.POST.get('inputLastName')
   target_record.international_student = request.POST.get('international')
   target_record.gender = request.POST.get('gender')
   target_record.email = request.POST.get('inputEmail')
-  #target_record.semester = request.POST.get('semester')
-  #target_record.calendar_year = request.POST.get('year')
   target_record.phone = request.POST.get('phoneNumber')
   target_record.byu_id = request.POST.get('BYUID')
-  #target_record.position = request.POST.get('positionType') changed
-  #target_record.class_code = request.POST.get('classCode')
   target_record.employee_record = request.POST.get('employeeRecord')
-  #target_record.supervisor = request.POST.get('inputFirstName') changed
   target_record.hire_date = request.POST.get('hireDate')
   target_record.pay_rate = request.POST.get('payRate')
   target_record.last_pay_increase = request.POST.get('lastPayRaise')
   target_record.pay_increase_amount = request.POST.get('payRateIncrease')
-  target_record.increase_input_date = request.POST.get('inputFirstName')
-  #target_record.year_in_program = request.POST.get('yearInProgram') changed
+  # target_record.increase_input_date = request.POST.get('inputFirstName')
   target_record.pay_grad_tuition = request.POST.get('paidTuition')
   target_record.is_terminated = request.POST.get('Terminated')
   target_record.terminated_date = request.POST.get('terminatedDate')
   target_record.qualtrics_sent = request.POST.get('qualtrics')
   target_record.eform = request.POST.get('eForm')
-  target_record.eform_date = request.POST.get('inputFirstName')
+  #target_record.eform_date = request.POST.get('inputFirstName')
   target_record.workauth = request.POST.get('authorized')
   target_record.workauth_date = request.POST.get('authSent')
-
 # Some of these are off. We need to verify the fields we are entering are correct
   target_record.save()
   text={}
