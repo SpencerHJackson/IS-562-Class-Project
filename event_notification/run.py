@@ -38,11 +38,11 @@ class Db:
       with open(file_path) as json_file:
         tracker = json.load(json_file)
 
-      for id in df_query['id']:
-        if str(id) in tracker:
-          tracker[str(id)] += 1
+      for byu_id in df_query['byu_id']:
+        if str(byu_id) in tracker:
+          tracker[str(byu_id)] += 1
         else:
-          tracker[str(id)] = 1
+          tracker[str(byu_id)] = 1
 
       email_id_list = []
       for x in tracker:
@@ -52,11 +52,11 @@ class Db:
       
       if len(email_id_list) > 0:
         email_text = ""
-        df_filterd_email = df_query[df_query.id.isin([int(x) for x in email_id_list])]
+        df_filterd_email = df_query[df_query.byu_id.isin([str(x) for x in email_id_list])]
         for index, row in df_filterd_email.iterrows():
           temp_fistname = df_filterd_email.loc[index, 'first_name']
           temp_lastname = df_filterd_email.loc[index, 'last_name']
-          temp_byuid = df_filterd_email.loc[index, 'byuid']
+          temp_byuid = df_filterd_email.loc[index, 'byu_id']
           email_text += temp_byuid + ": " + temp_fistname + " " + temp_lastname + "\n"
         self.send_email(subject=subject, text=email_text)
       with open(file_path, "w") as outfile:
@@ -73,7 +73,7 @@ def run():
       pass
   
   try:
-    query = "SELECT id, first_name, last_name, byuid FROM BYUIS.students where workauth = 'No'"
+    query = "SELECT byu_id, first_name, last_name FROM BYUIS.student_employee where workauth = 0;"
     subject = "Alert! You have employees who haven't been authorized to work for a week"
     Db_svc.update_tracker(query=query, tracker_name="workauth_tracker.json", subject=subject)
   except Exception as e:
@@ -81,7 +81,7 @@ def run():
     pass  
   
   try:
-    query = "SELECT * FROM BYUIS.students where qualtricssent = 'Yes' and eform ='No'"
+    query = "SELECT  byu_id, first_name, last_name FROM BYUIS.student_employee where qualtrics_sent = 1 and eform = 0;"
     subject = "Alert! You have employees who signed Qualtrics Form but haven't signed E-Form for a week "
     Db_svc.update_tracker(query=query, tracker_name="eform_tracker.json", subject=subject)
   except:
