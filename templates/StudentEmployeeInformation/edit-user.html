@@ -1,0 +1,606 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit {{ first_name }}{% endblock %}
+
+{% block content %}
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Add User</title>
+    <link href="css/styles.css" rel="stylesheet" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+  </head> 
+  <body class="bg-primary">
+    <div id="layoutAuthentication">
+      <div id="layoutAuthentication_content">
+        <main> {% endcomment %}
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                  <div class="card-header">
+                    <h3 class="text-center font-weight-light my-4">Add User</h3>
+                  </div>
+                  <div class="card-body">
+
+                    <form name="addEmployee" method="post" action="{% url 'saverecord' %}">
+                      {% csrf_token %}
+                      <div class="row mb-3">
+                        <h3 class="text-center my-4">Student Personal Information</h3>
+                        <div class="col-md-6">
+                          <div class="form-floating mb-3 mb-md-0">
+                            <input
+                              class="form-control"
+                              id="inputFirstName"
+                              name="inputFirstName"
+                              type="text"
+                              placeholder="Enter your first name"
+                              value={{ first_name }}
+                            />
+                            <label for="inputFirstName">First name</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-floating">
+                            <input
+                              class="form-control"
+                              id="inputLastName"
+                              name="inputLastName"
+                              type="text"
+                              placeholder="Enter your last name"
+                              value={{last_name}}
+                            />
+                            <label for="inputLastName">Last name</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <div class="form-floating mb-3">
+                            <input
+                              class="form-control"
+                              id="inputEmail"
+                              name="inputEmail"
+                              type="email"
+                              placeholder="name@example.com"
+                              value={{email}}
+                            />
+                            <label for="inputEmail">Email address</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3 mb-md-0">
+                                <input
+                                  class="form-control"
+                                  name="phoneNumber"
+                                  id="phoneNumber"
+                                  type="text"
+                                  placeholder="Phone Number"
+                                  value ={{phone}}
+                                />
+                                <label for="phoneNumber">Phone Number</label>
+                              </div>
+
+                          
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          {% if international == 1%}
+                          <h6 >International Student?</h6>
+                          <div class="form-check form-check-inline ">
+                            <input
+                              class="form-check-input mx-auto"
+                              type="radio"
+                              name="international"
+                              id="international"
+                              value="Yes"
+                              checked
+                            />
+                            <label class="form-check-label" for="international"
+                              >Yes</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline text-center">
+                            <input
+                              class="form-check-input "
+                              type="radio"
+                              name="international"
+                              id="international"
+                              value="No"
+                            />
+                            <label class="form-check-label" for="international"
+                              >No</label
+                            >
+                          </div>
+                          {% else %}
+                          <h6 >International Student?</h6>
+                          <div class="form-check form-check-inline ">
+                            <input
+                              class="form-check-input mx-auto"
+                              type="radio"
+                              name="international"
+                              id="international"
+                              value="Yes"
+                            />
+                            <label class="form-check-label" for="international"
+                              >Yes</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline text-center">
+                            <input
+                              class="form-check-input "
+                              type="radio"
+                              name="international"
+                              id="international"
+                              value="No"
+                              checked
+                            />
+                            <label class="form-check-label" for="international"
+                              >No</label
+                            >
+                          </div>
+                          {%endif%}
+
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="semester">Select Semester</label>
+                            <select
+                              name="semester"
+                              id="semester"
+                              class="form-control"
+                              style="width: 100%"
+                            >
+                            <option value='' {% if semester == '' %}selected{%endif%}> -- select an option -- </option>
+                              <option value="Fall" {% if semester == 'Fall' %}selected{%endif%}>Fall</option>
+                              <option value="Winter" {% if semester == 'Winter' %}selected{%endif%}>Winter</option>
+                              <option value="Spring" {% if semester == 'Spring' %}selected{%endif%}>Spring</option>
+                              <option value="Summer" {% if semester == 'Summer' %}selected{%endif%}>Summer</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="year">Select Year</label>
+                            <select
+                              name="year"
+                              id="year"
+                              class="form-control"
+                              style="width: 100%"
+                            >
+                            <option value='' {% if calendaryear == '' %}selected{%endif%}> -- select an option -- </option>
+                              <option value="2022" {%if calendaryear == '2022'%} selected{%endif%}>2022</option>
+                              <option value="2021" {%if calendaryear == '2021'%} selected{%endif%}>2021</option>
+                              <option value="2020" {%if calendaryear == '2020'%} selected{%endif%}>2020</option>
+                              <option value="2019" {%if calendaryear == '2019'%} selected{%endif%}>2019</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="gender">Select Gender</label>
+                                <select
+                                  name="gender"
+                                  id="gender"
+                                  class="form-control"
+                                  style="width: 100%"
+                                >
+                                <option value='' {% if gender == '' %}selected{%endif%}> -- select an option -- </option>
+                                  <option value="Male" {%if gender == 'Male'%} selected {%endif%}>Male</option>
+                                  <option value="Female" {%if gender == 'Female'%} selected {%endif%}>Female</option>
+                                  <option value="Other" {%if gender == 'Other'%} selected {%endif%}>Other</option>
+                                </select>
+                              </div>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <div class="form-floating mb-3 mb-md-0">
+                            <input
+                              class="form-control"
+                              id="BYUID"
+                              name="BYUID"
+                              type="text"
+                              placeholder="Phone Number"
+                              value={{byuid}}
+                            />
+                            <label for="BYUID">BYU ID</label>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="yearInProgram"
+                                  >Select Program</label
+                                >
+                                <select
+                                  name="yearInProgram"
+                                  id="yearInProgram"
+                                  class="form-control"
+                                  style="width: 100%"
+                                >
+                                <option value='' {% if yearinprogram == '' %}selected{%endif%}> -- select an option -- </option>
+                                  <option value="MSBCore" {%if yearinprogram == 'MSBCore'%} selected {%endif%}>MSB Core (IS or other)</option>
+                                  <option value="MISM" {%if yearinprogram == 'MISM'%} selected {%endif%}>MISM</option>
+                                  <option value="MBA" {%if yearinprogram == 'MBA'%} selected {%endif%}>MBA</option>
+                                  <option value="MPA" {%if yearinprogram == 'MPA'%} selected {%endif%}>MPA</option>
+                                  <option value="Macc" {%if yearinprogram == 'Macc'%} selected {%endif%}>Macc</option>
+                                  <option value="Other"{%if yearinprogram == 'Other'%} selected {%endif%}>
+                                    Other majors on campus
+                                  </option>
+                                </select>
+                              </div>
+                          
+                        </div>
+                      </div>
+                      <h3 class="text-center my-4">Student Employment Information</h3>
+                      <div class="row mb-3">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="classCode">Class Code</label>
+                            <select
+                              name="classCode"
+                              id="classCode"
+                              class="form-control"
+                              style="width: 100%"
+                            >
+                            <option value='' {% if class_code == '' %}selected{%endif%}> -- select an option -- </option>
+                              <option value="0" {%if class_code == '0'%} selected {%endif%}>0</option>
+                              <option value="1" {%if class_code == '1'%} selected {%endif%}>1</option>
+                              <option value="2" {%if class_code == '2'%} selected {%endif%}>2</option>
+                              <option value="3" {%if class_code == '3'%} selected {%endif%}>3</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="employeeRecord">Employee Record</label>
+                            <select
+                              name="employeeRecord"
+                              id="employeeRecord"
+                              class="form-control"
+                              style="width: 100%"
+                            >
+                            <option value='' {% if employee_record == '' %}selected{%endif%}> -- select an option -- </option>
+                              <option value="0" {%if employee_record == '0'%} selected {%endif%}>0</option>
+                              <option value="1" {%if employee_record == '1'%} selected {%endif%}>1</option>
+                              <option value="2" {%if employee_record == '2'%} selected {%endif%}>2</option>
+                              <option value="3" {%if employee_record == '3'%} selected {%endif%}>3</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-floating mb-3 mb-md-0">
+                            <input
+                              class="form-control"
+                              name="hireDate"
+                              id="hireDate"
+                              type="date"
+                              placeholder="Hire Date"
+                              value= {{hiredate}}
+                            />
+                            <label for="hireDate">Hire Date</label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <div class="form-floating mb-3 mb-md-0">
+                            <input
+                              class="form-control"
+                              name="payRate"
+                              id="payRate"
+                              type="text"
+                              placeholder="payRate"
+                              value={{payrate}}
+                            />
+                            <label for="payRate">Pay Rate</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-floating mb-3 mb-md-0">
+                            <input
+                              class="form-control"
+                              name="lastPayRaise"
+                              id="lastPayRaise"
+                              type="date"
+                              placeholder="lastPayRaise"
+                              value={{lastpayincrease}}
+                            />
+                            <label for="lastPayRaise"
+                              >Last Pay Rate Increase</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <div class="form-floating mb-3 mb-md-0">
+                            <input
+                              class="form-control"
+                              name="payRateIncrease"
+                              id="payRateIncrease"
+                              type="text"
+                              placeholder="payRateIncrease"
+                              value={{payincreaseamount}}
+                            />
+                            <label for="payRateIncrease"
+                              >Pay increase amount ($)</label
+                            >
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="positionType">Select Position</label>
+                                <select
+                                  name="positionType"
+                                  id="positionType"
+                                  class="form-control"
+                                  style="width: 100%"
+                                >
+                                <option value='' {% if position == '' %}selected{%endif%}> -- select an option -- </option>
+                                  <option value="TA" {%if position == 'TA'%} selected {%endif%}>TA</option>
+                                  <option value="RA" {%if position == 'RA'%} selected {%endif%}>RA</option>
+                                  <option value="Office" {%if position == 'Office'%} selected {%endif%}>Office</option>
+                                  <option value="Student Instructor" {%if position == 'Student Instructor'%} selected {%endif%}>
+                                    Student Instructor
+                                  </option>
+                                  <option value="Other" {%if position == 'Other'%} selected {%endif%}>Other</option>
+                                </select>
+                              </div>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <h6>Paid Grad Tuition?</h6>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="paidTuition"
+                              id="paidTuition"
+                              value="1"
+                              {%if paygradtuition == 1%} checked {%endif%}
+                            />
+                            <label class="form-check-label" for="paidTuition"
+                              >Yes</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="paidTuition"
+                              id="paidTuition"
+                              value="0"
+                              {%if paygradtuition == 0%} checked {%endif%}
+                            />
+                            <label class="form-check-label" for="paidTuition"
+                              >No</label
+                            >
+                          </div>
+                        </div>
+                      
+                          
+                      <div class="col-md-6">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="namechange"
+                            value=""
+                            name="namechange"
+                            id="namechange"
+                          />
+                          <label class="form-check-label" for="namechange">
+                            Name Change Completed?
+                          </label>
+                        </div>
+                      </div>
+                      <h4 class="text-center my-4">Work Auth/Qualtrics</h4> 
+                      
+
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <div class="form-check">
+                            <div class="form-check form-check-inline">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="authorized"
+                                id="authorized"
+                                value="1"
+                                {%if workauth == 1%} checked {%endif%}
+                              />
+                              <label class="form-check-label" for="authorized"
+                                >Yes</label
+                              >
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="authorized"
+                                id="authorized"
+                                value="0"
+                                {%if workauth == 0%} checked {%endif%}
+                              />
+                              <label class="form-check-label" for="authorized"
+                                >No</label
+                              >
+                            </div>
+                            <label class="form-check-label" for="authorized">
+                              Authorized to Work
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-floating mb-3 mb-md-0">
+                            <input
+                              class="form-control"
+                              name="authSent"
+                              id="authSent"
+                              type="date"
+                              placeholder="authSent"
+                              value={{workauthdate}}
+                            />
+                            <label for="authSent"
+                              >Authorized Date</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                      
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="qualtrics">Qualtrics</label>
+                            <select
+                              name="qualtrics"
+                              id="qualtrics"
+                              class="form-qualtrics"
+                              style="width: 100%"
+                            >
+                              <option value='1' {%if qualtricssent == 1%} selected {%endif%}>Yes</option>
+                              <option value="0" {%if qualtricssent == 0%} selected {%endif%}>No</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-check">
+                            <div class="form-check form-check-inline">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="eForm"
+                                id="eForm"
+                                value="1"
+                                {%if eform == 1%} checked {%endif%}
+                              />
+                              <label class="form-check-label" for="eForm"
+                                >Yes</label
+                              >
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="eForm"
+                                id="eForm"
+                                value="0"
+                                {%if eform == 0%} checked {%endif%}
+                              />
+                              <label class="form-check-label" for="eForm"
+                                >No</label
+                              >
+                            </div>
+                            <label class="form-check-label" for="eForm">
+                              Submitted E-Form
+                            </label>
+                          </div>
+                        </div>
+                        <h4 class="text-center my-4">Termination Details</h4>
+                        <div class="row mb-3">
+                          <div class="col-md-6">
+                            <h6>Are they Terminated?</h6>
+                            <div class="form-check form-check-inline">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="Terminated"
+                                id="Terminated"
+                                value="1"
+                                {%if isterminated == 1%} checked {%endif%}
+                              />
+                              <label class="form-check-label" for="Terminated"
+                                >Yes</label
+                              >
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="Terminated"
+                                id="Terminated"
+                                value="0"
+                                {%if isterminated == 0%} checked {%endif%}
+                              />
+                              <label class="form-check-label" for="Terminated"
+                                >No</label
+                              >
+                            </div>
+                          </div>
+  
+                          <div class="col-md-6">
+                            <div class="form-floating mb-3 mb-md-0">
+                              <input
+                                class="form-control"
+                                name="terminatedDate"
+                                id="terminatedDate"
+                                type="date"
+                                placeholder="terminatedDate"
+                                value={{terminateddate}}
+                              />
+                              <label for="terminatedDate">Termination Date</label>
+                            </div>
+                          </div>
+                        </div>
+                      <button type="submit" class="btn btn-primary">Edit Employee</button>
+                    </form>
+
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        {% comment %} </main>
+      </div>
+      <div id="layoutAuthentication_footer">
+        <footer class="py-4 bg-light mt-auto">
+          <div class="container-fluid px-4">
+            <div
+              class="d-flex align-items-center justify-content-between small"
+            >
+              <div class="text-muted">Copyright &copy; Your Website 2022</div>
+              <div>
+                <a href="#">Privacy Policy</a>
+                &middot;
+                <a href="#">Terms &amp; Conditions</a>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html> {% endcomment %}
+
+{% endblock %}
