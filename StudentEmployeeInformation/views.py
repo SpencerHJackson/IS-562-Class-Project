@@ -148,6 +148,8 @@ def edit_record(request):
     target_record = df_query.iloc[0].to_dict()
     target_record['phone'] = str(target_record['phone']) if target_record['phone'] is not None else 'xxx-xxx-xxxx'
     target_record['hire_date'] = str(target_record['hire_date']) if target_record['hire_date'] is not None else '0001-01-01'
+    target_record['eform_date'] = str(target_record['eform_date']) if target_record['eform_date'] is not None else '0001-01-01'
+    target_record['increase_input_date'] = str(target_record['increase_input_date']) if target_record['increase_input_date'] is not None else '0001-01-01'
     target_record['last_pay_increase'] = str(target_record['last_pay_increase']) if target_record['last_pay_increase'] is not None else '0001-01-01'
     target_record['pay_rate'] = str(target_record['pay_rate']) if target_record['pay_rate'] is not None else '0'
     target_record['pay_increase_amount'] = str(target_record['pay_increase_amount']) if target_record['pay_increase_amount'] is not None else '0'
@@ -206,6 +208,8 @@ def save_record(request):
   #target_record.eform_date = request.POST.get('inputFirstName')
   target_record.workauth = request.POST.get('authorized')
   target_record.workauth_date = request.POST.get('authSent')
+  target_record.expected_hours = request.POST.get('expected_hours')
+  target_record.increase_input_date = request.POST.get('increase_input_date')
 # Some of these are off. We need to verify the fields we are entering are correct
   target_record.save()
   text={}

@@ -156,7 +156,7 @@
                           {%endif%}
 
                         </div>
-                        <div class="col-md-6">
+                        {% comment %} <div class="col-md-6">
                           <div class="form-group">
                             <label for="semester">Select Semester</label>
                             <select
@@ -172,7 +172,7 @@
                               <option value="Summer" {% if semester == 'Summer' %}selected{%endif%}>Summer</option>
                             </select>
                           </div>
-                        </div>
+                        </div> {% endcomment %}
                       </div>
                       <div class="row mb-3">
                         <div class="col-md-6">
@@ -251,7 +251,7 @@
                       </div>
                       <h3 class="text-center my-4">Student Employment Information</h3>
                       <div class="row mb-3">
-                        <div class="col-md-4">
+                        {% comment %} <div class="col-md-4">
                           <div class="form-group">
                             <label for="classCode">Class Code</label>
                             <select
@@ -266,8 +266,8 @@
                               <option value="2" {%if class_code == '2'%} selected {%endif%}>2</option>
                               <option value="3" {%if class_code == '3'%} selected {%endif%}>3</option>
                             </select>
-                          </div>
-                        </div>
+                          </div> 
+                        </div>{% endcomment %}
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="employeeRecord">Employee Record</label>
@@ -347,9 +347,21 @@
                             >
                           </div>
                         </div>
-
                         <div class="col-md-6">
-                            <div class="form-group">
+                          <div class="form-floating mb-3 mb-md-0">
+                            <input
+                              class="form-control"
+                              name="increase_input_date"
+                              id="increase_input_date"
+                              type="date"
+                              placeholder="lastPayRaise"
+                              value={{increase_input_date}}
+                            />
+                            <label for="increase_input_date"> Increase Input Date</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                            {% comment %} <div class="form-group">
                                 <label for="positionType">Select Position</label>
                                 <select
                                   name="positionType"
@@ -366,10 +378,25 @@
                                   </option>
                                   <option value="Other" {%if position == 'Other'%} selected {%endif%}>Other</option>
                                 </select>
-                              </div>
+                              </div> {% endcomment %}
+                              
+                          <div class="form-floating mb-3 mb-md-0">
+                            <input
+                              class="form-control"
+                              name="expected_hours"
+                              id="expected_hours"
+                              type="text"
+                              
+                              value={{expected_hours}}
+                            />
+                            <label for="expected_hours"
+                              >Expected Work Hours</label
+                            >
+                          </div>
+                              
                         </div>
                       </div>
-
+                      
                       <div class="row mb-3">
                         <div class="col-md-6">
                           <h6>Paid Grad Tuition?</h6>
@@ -538,6 +565,20 @@
                             <label class="form-check-label" for="eForm">
                               Submitted E-Form
                             </label>
+                          </div>
+                          <div class="form-floating mb-3 mb-md-0">
+                            <input
+                              class="form-control"
+                              name="eformDate"
+                              id="eformDate"
+                              type="date"
+                              placeholder="eformDate"
+                              value={{eform_date}}
+                            />
+                            <label for="eformDate"
+                              >E-form Date Sent</label
+                            >
+                          </div>
                           </div>
                         </div>
                         <h4 class="text-center my-4">Termination Details</h4>
