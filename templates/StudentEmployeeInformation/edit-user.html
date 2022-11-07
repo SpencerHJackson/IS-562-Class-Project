@@ -236,12 +236,12 @@
                                   style="width: 100%"
                                 >
                                 <option value='' {% if yearinprogram == '' %}selected{%endif%}> -- select an option -- </option>
-                                  <option value="MSBCore" {%if year_in_program_id == 'MSBCore'%} selected {%endif%}>MSB Core (IS or other)</option>
-                                  <option value="MISM" {%if year_in_program_id == 'MISM'%} selected {%endif%}>MISM</option>
-                                  <option value="MBA" {%if year_in_program_id == 'MBA'%} selected {%endif%}>MBA</option>
-                                  <option value="MPA" {%if year_in_program_id == 'MPA'%} selected {%endif%}>MPA</option>
-                                  <option value="Macc" {%if year_in_program_id == 'Macc'%} selected {%endif%}>Macc</option>
-                                  <option value="Other"{%if year_in_program_id == 'Other'%} selected {%endif%}>
+                                  {% comment %} <option value="MSBCore" {%if year_in_program_id == 'MSBCore'%} selected {%endif%}>MSB Core (IS or other)</option> {% endcomment %}
+                                  <option value="1" {%if year_in_program_id == 'MISM'%} selected {%endif%}>MISM</option>
+                                  <option value="2" {%if year_in_program_id == 'MBA'%} selected {%endif%}>MBA</option>
+                                  <option value="3" {%if year_in_program_id == 'MPA'%} selected {%endif%}>MPA</option>
+                                  <option value="4" {%if year_in_program_id == 'Macc'%} selected {%endif%}>Macc</option>
+                                  <option value="5"{%if year_in_program_id == 'Other'%} selected {%endif%}>
                                     Other majors on campus
                                   </option>
                                 </select>
