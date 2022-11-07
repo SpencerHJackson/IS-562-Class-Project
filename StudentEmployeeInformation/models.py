@@ -90,6 +90,12 @@ class StudentEmployeePosition(models.Model):
     def __str__(self):
         return(self.position)
 
+class StudentAssignment(models.Model):
+    position = models.ForeignKey(StudentEmployeePosition, on_delete=models.RESTRICT)
+    supervisor = models.ForeignKey(ISStaffMember, on_delete=models.RESTRICT)
+    semester = models.ForeignKey(Semester, on_delete=models.RESTRICT)
+    class_code = models.ForeignKey(UniveristyClass, on_delete=models.RESTRICT, blank=True, null=True)
+
 class Student(models.Model):
     first_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255, blank=True, null=True)
@@ -120,6 +126,7 @@ class Student(models.Model):
     ra_history = models.ManyToManyField(ResearchSection, blank=True)
     expected_hours = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     byu_name = models.CharField(max_length=255, blank=True, null=True)
+    work_assignments = models.ManyToManyField(StudentAssignment, blank=True)
 
     class Meta:
         db_table = 'student_employee'
