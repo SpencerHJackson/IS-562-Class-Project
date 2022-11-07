@@ -4,6 +4,40 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<script>
+    function download_csv_file() {  
+  
+        //define the heading for each row of the data  
+        var csv = 'first_name, last_name, internation_student, gender, email, phone, byu_id, position_id, employee_record, supervisor_id, hire_date, pay_rate, last_pay_increase, pay_increase_amount, increase_input_date\n';   
+        
+        "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08"
+        
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+
+        var hiddenElement = document.createElement('a');  
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);  
+        hiddenElement.target = '_blank';  
+          
+        //provide the name for the CSV file to be downloaded  
+        hiddenElement.download = 'Student Employees.csv';  
+        hiddenElement.click();  
+    }
+    
+</script>
+
 
 <div class="container-fluid px-4">
     <br/>
@@ -20,6 +54,8 @@
         <br><br>
         <button type="submit" class="btn btn-info">Send Test Email</button>
     </form><br> {% endcomment %}
+    
+
     <a class="btn btn-success" href="{% url 'addStudentEmployeeForm' %}">Add New Student Employee</a>
     <a class="btn btn-success" href="{% url 'searchbyuid' %}">Edit Employee by BYU ID</a>
     <div class="row ">
@@ -114,6 +150,13 @@
             </table>
         </div>
     </div>
+    <div>
+        <h3>Download Employee Data CSVs</h3>
+        <button class="btn btn-success" onclick="download_csv_file()">Employee by Supervisor</button>
+        <button class="btn btn-success" onclick="download_csv_file()">Employee by Semester</button>
+        <button class="btn btn-success" onclick="download_csv_file()">All Employees</button>
+    </div>
+
 </div>
 
 {% endblock %}
