@@ -10,6 +10,8 @@ urlpatterns = [
     path('editrecord/', edit_record, name="editrecord"),
     path('saverecord/', save_record, name="saverecord"),
     path('tableau/', tableauView, name="TableauGraphs"),
+    path('addWorkAssignment/<str:byuNumber>/', addWorkAssignmentView, name="addWorkAssignment"),
+    path('storeJob/', storeWorkAssignment, name="storeStudentJob"),
     path('login', loginView, name="login"),
     path('addlogin', addloginView, name="addlogin")
 

@@ -6,10 +6,12 @@
 {% block content %}
 
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Student Employee Data</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Dashboard</li>
-    </ol>
+    <br/>
+    <br/>
+    <h1 class="mt-8">BYU I.S. Employee Registration Portal</h1>
+    <br/>
+   
+    <br/>
     {% comment %} <form action="{% url 'sendEmail' %}" method="post">
         {% csrf_token %}
         <input name="recipient" type="text" placeholder="Enter the recipient email">
@@ -18,63 +20,60 @@
         <br><br>
         <button type="submit" class="btn btn-info">Send Test Email</button>
     </form><br> {% endcomment %}
-    
-    <div class="row">
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-primary text-white mb-4">
-                <div class="card-body">Primary Card</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-warning text-white mb-4">
-                <div class="card-body">Warning Card</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-success text-white mb-4">
-                <div class="card-body">Success Card</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-danger text-white mb-4">
-                <div class="card-body">Danger Card</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-        </div>
+    <a class="btn btn-success" href="{% url 'addStudentEmployeeForm' %}">Add New Student Employee</a>
+    <a class="btn btn-success" href="{% url 'searchbyuid' %}">Search Employee by BYU ID</a>
+    <div class="row ">
+        {% comment %} <div class='tableauPlaceholder' id='viz1667258404049' style='width:100%; height:100%;'>
+            <noscript>
+                <a href='#'>
+                    <img alt='Student Employee Information Summative Reports  ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;IS&#47;IS405project&#47;Dashboard1&#47;1_rss.png' style='border: none' />
+                </a>
+            </noscript>
+            <object class='tableauViz'  width="100%" height="100%" style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' /> 
+                <param name='site_root' value='' />
+                <param name='name' value='IS405project&#47;Dashboard1' />
+                <param name='tabs' value='no' /><param name='toolbar' value='yes' />
+                <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;IS&#47;IS405project&#47;Dashboard1&#47;1.png' /> 
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-US' />
+            </object>
+        </div>                 {% endcomment %}
+        <script type='text/javascript'>                    var divElement = document.getElementById('viz1667258404049');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1654px';vizElement.style.height='1196px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1654px';vizElement.style.height='1196px';} else { vizElement.style.width='100%';vizElement.style.height='2177px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
     </div>
-    <div class="row">
-        <div class="col-xl-6">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-chart-area me-1"></i>
-                    Area Chart Example
-                </div>
-                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-            </div>
-        </div>
-        <div class="col-xl-6">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-chart-bar me-1"></i>
-                    Bar Chart Example
-                </div>
-                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-            </div>
+    <div class="container-fluid px-4">
+        {% comment %} <h1 class="mt-4">Tableau Graphs</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Tableau Graphs</li>
+        </ol> {% endcomment %}
+        <div class="row">
+                <div class='tableauPlaceholder' id='viz1667258404049' style='width:100%; height:100%;'>
+                    <noscript>
+                        <a href='#'>
+                            <img alt='Student Employee Information Summative Reports  ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;IS&#47;IS405project&#47;Dashboard1&#47;1_rss.png' style='border: none' />
+                        </a>
+                    </noscript>
+                    <object class='tableauViz'  width="100%" height="100%" style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_code_version' value='3' /> 
+                        <param name='site_root' value='' />
+                        <param name='name' value='IS405project&#47;Dashboard1' />
+                        <param name='tabs' value='no' /><param name='toolbar' value='yes' />
+                        <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;IS&#47;IS405project&#47;Dashboard1&#47;1.png' /> 
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='en-US' />
+                    </object>
+                </div>                
+                <script type='text/javascript'>                    var divElement = document.getElementById('viz1667258404049');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1654px';vizElement.style.height='1196px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1654px';vizElement.style.height='1196px';} else { vizElement.style.width='100%';vizElement.style.height='2177px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
         </div>
     </div>
 
@@ -88,25 +87,27 @@
             <table id="datatablesSimple">
                 <thead>
                     <tr>
+                        <th>More Info</th>
                         <th>Name</th>
-                        <th>Position</th>
-                        <th>Class Code</th>
-                        <th>Supervisor</th>
+                        <th>BYU ID</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
                         <th>Hire Date</th>
                         <th>Salary</th>
-                        <th>More Info</th>
+                        <th>Work History</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for x in studentRecords %}
                     <tr>
+                        <td><a class="btn btn-dark">View/Edit</a><a class="btn " style="background-color:#4E79A7; color: white" href="{% url 'addWorkAssignment' byuNumber=x.byu_id %}">Add Job Information</a></td>
                         <td>{{ x.first_name }} {{x.last_name}}</td>
-                        <td>{{x.position}}</td>
-                        <td>{{x.class_code}}</td>
-                        <td>{{x.supervisor}}</td>
+                        <td>{{x.byu_id}}</td>
+                        <td>{{x.phone}}</td>
+                        <td>{{x.email}}</td>
                         <td>{{x.hiredate}}</td>
                         <td>{{x.payrate}}</td>
-                        <td><button type="submit">View/Edit</button></td>
+                        <td>{{x.work_assignments_list}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

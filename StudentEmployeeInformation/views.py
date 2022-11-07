@@ -2,11 +2,11 @@ from email.mime.text import MIMEText
 from django.http import HttpResponse
 import smtplib
 import ssl
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import mysql.connector
 import pandas as pd
 
-from StudentEmployeeInformation.models import Student
+from StudentEmployeeInformation.models import Student, Semester, YearInProgram, UniveristyClass, StudentEmployeePosition, ISStaffMember, StudentAssignment
 
 # Create your views here.
 def indexPageView(request):
@@ -20,7 +20,56 @@ def indexPageView(request):
   return render(request, 'StudentEmployeeInformation/index.html', context)
 
 def addStudentEmployeeFormPageView(request):
-    return render(request, 'StudentEmployeeInformation/add-user.html')
+  semester = Semester.objects.all()
+  yearInProgram = YearInProgram.objects.all()
+  univeristyClass = UniveristyClass.objects.all()
+
+  context = {
+    'semester' : semester,
+    'yearInProgram' : yearInProgram,
+    'univeristyClass' : univeristyClass,
+
+  }
+  return render(request, 'StudentEmployeeInformation/add-user.html', context)
+
+def addWorkAssignmentView(request, byuNumber):
+  semester = Semester.objects.all()
+  univeristyClass = UniveristyClass.objects.all()
+  position = StudentEmployeePosition.objects.all()
+  supervisor = ISStaffMember.objects.all()
+
+  student = Student.objects.get(byu_id=byuNumber)
+
+  context = {
+    'semester' : semester,
+    'univeristyClass' : univeristyClass,
+    'position' : position,
+    'supervisor' : supervisor,
+    'student' : student,
+  }
+
+  return render(request, 'StudentEmployeeInformation/add-work-assignment.html', context)
+
+def storeWorkAssignment(request):
+  if request.method=='POST':
+    byuIDNumber = request.POST.get('BYUID')
+    student = Student.objects.get(byu_id=byuIDNumber)
+
+    new_assignment=StudentAssignment()
+    semesterID = request.POST.get('semester')
+    new_assignment.semester = Semester.objects.get(id=semesterID)
+    classID = request.POST.get('classCode')
+    new_assignment.class_code = UniveristyClass.objects.get(id=classID)
+    positionID = request.POST.get('positionType')
+    new_assignment.position = StudentEmployeePosition.objects.get(id=positionID)
+    supervisorID = request.POST.get('supervisor')
+    new_assignment.supervisor = ISStaffMember.objects.get(id=supervisorID)
+
+    new_assignment.save()
+
+    student.work_assignments.add(new_assignment)
+
+    return redirect('index')
 
 def storeStudentEmployeePageView(request):
   if request.method=='POST':
@@ -42,22 +91,26 @@ def storeStudentEmployeePageView(request):
     new_employee.pay_rate = request.POST.get('payRate')
     new_employee.last_pay_increase = request.POST.get('lastPayRaise')
     new_employee.pay_increase_amount = request.POST.get('payRateIncrease')
-    new_employee.increase_input_date = request.POST.get('inputFirstName')
-    #new_employee.year_in_program = request.POST.get('yearInProgram') changed
+    new_employee.increase_input_date = request.POST.get('increase_input_date')
+    sYear = request.POST.get('yearInProgram')
+    new_employee.year_in_program = YearInProgram.objects.get(student_year=sYear)
     new_employee.pay_grad_tuition = request.POST.get('paidTuition')
     new_employee.is_terminated = request.POST.get('Terminated')
     new_employee.terminated_date = request.POST.get('terminatedDate')
     new_employee.qualtrics_sent = request.POST.get('qualtrics')
     new_employee.eform = request.POST.get('eForm')
-    new_employee.eform_date = request.POST.get('inputFirstName')
+    new_employee.eform_date = request.POST.get('eformDate')
     new_employee.workauth = request.POST.get('authorized')
     new_employee.workauth_date = request.POST.get('authSent')
+    new_employee.expected_hours = request.POST.get('expected_hours')
+    new_employee.name_change = request.POST.get('nameChange')
+    new_employee.byu_name = request.POST.get('inputBYUName')
 
 # Some of these are off. We need to verify the fields we are entering are correct
     new_employee.save()
     send_email(request)
 
-  return render(request, 'StudentEmployeeInformation/index.html')
+  return redirect('index')
 
 def send_email(request):
     port = 465

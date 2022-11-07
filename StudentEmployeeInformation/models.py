@@ -96,6 +96,13 @@ class StudentAssignment(models.Model):
     semester = models.ForeignKey(Semester, on_delete=models.RESTRICT)
     class_code = models.ForeignKey(UniveristyClass, on_delete=models.RESTRICT, blank=True, null=True)
 
+    class Meta:
+        db_table = "student_assignment"
+        ordering = ['semester']
+
+    def __str__(self):
+        return(str(self.semester) + " - " + str(self.position) + " - " + str(self.supervisor))
+
 class Student(models.Model):
     first_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255, blank=True, null=True)
@@ -134,3 +141,14 @@ class Student(models.Model):
 
     def __str__(self):
         return(str(self.last_name) + ", " + str(self.first_name))
+
+    @property
+    def work_assignments_list(self):
+
+        sAllWorkAssignments = ""
+        for studentAssignment in self.work_assignments.all():
+            sAllWorkAssignments = sAllWorkAssignments + str(studentAssignment)
+            if studentAssignment != self.work_assignments.last():
+                sAllWorkAssignments = sAllWorkAssignments + " /  "
+
+        return(sAllWorkAssignments)
