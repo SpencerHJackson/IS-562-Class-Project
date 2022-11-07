@@ -73,6 +73,12 @@ def storeWorkAssignment(request):
 
 def storeStudentEmployeePageView(request):
   if request.method=='POST':
+
+    if request.POST.get('lastPayRaise') == "":
+      lastPayRaiseCleaned = None
+    else:
+      lastPayRaiseCleaned = request.POST.get('lastPayRaise')
+
     new_employee=Student()
     new_employee.first_name = request.POST.get('inputFirstName')
     new_employee.last_name = request.POST.get('inputLastName')
@@ -89,7 +95,7 @@ def storeStudentEmployeePageView(request):
     #new_employee.supervisor = request.POST.get('inputFirstName') changed
     new_employee.hire_date = request.POST.get('hireDate')
     new_employee.pay_rate = request.POST.get('payRate')
-    new_employee.last_pay_increase = request.POST.get('lastPayRaise')
+    new_employee.last_pay_increase = lastPayRaiseCleaned
     new_employee.pay_increase_amount = request.POST.get('payRateIncrease')
     new_employee.increase_input_date = request.POST.get('increase_input_date')
     sYear = request.POST.get('yearInProgram')
