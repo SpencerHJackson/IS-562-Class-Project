@@ -6,7 +6,7 @@ from django.shortcuts import render
 import mysql.connector
 import pandas as pd
 
-from StudentEmployeeInformation.models import Student
+from StudentEmployeeInformation.models import Student, Semester, YearInProgram, UniveristyClass
 
 # Create your views here.
 def indexPageView(request):
@@ -20,7 +20,17 @@ def indexPageView(request):
   return render(request, 'StudentEmployeeInformation/index.html', context)
 
 def addStudentEmployeeFormPageView(request):
-    return render(request, 'StudentEmployeeInformation/add-user.html')
+  semester = Semester.objects.all()
+  yearInProgram = YearInProgram.objects.all()
+  univeristyClass = UniveristyClass.objects.all()
+
+  context = {
+    'semester' : semester,
+    'yearInProgram' : yearInProgram,
+    'univeristyClass' : univeristyClass,
+
+  }
+  return render(request, 'StudentEmployeeInformation/add-user.html', context)
 
 def storeStudentEmployeePageView(request):
   if request.method=='POST':
