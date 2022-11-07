@@ -9,5 +9,8 @@ urlpatterns = [
     path('searchbyuid/', search_byuid, name="searchbyuid"),
     path('editrecord/', edit_record, name="editrecord"),
     path('saverecord/', save_record, name="saverecord"),
-    path('tableau/', tableauView, name="TableauGraphs")
+    path('tableau/', tableauView, name="TableauGraphs"),
+    path('login', loginView, name="login"),
+    path('addlogin', addloginView, name="addlogin")
+
 ]

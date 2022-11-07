@@ -144,3 +144,11 @@ def save_record(request):
   text={}
   text['alert'] = 'Update success!' 
   return render(request, 'StudentEmployeeInformation/search_byuid.html', text)
+
+
+def loginView(request):
+    return render(request, 'StudentEmployeeInformation/login.html')
+    
+
+def addloginView(request):
+    return render(request, 'StudentEmployeeInformation/newlogin.html')

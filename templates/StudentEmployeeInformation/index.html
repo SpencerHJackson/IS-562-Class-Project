@@ -6,7 +6,7 @@
 {% block content %}
 
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Dashboard</h1>
+    <h1 class="mt-4">Student Employee Data</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Dashboard</li>
     </ol>
@@ -18,8 +18,7 @@
         <br><br>
         <button type="submit" class="btn btn-info">Send Test Email</button>
     </form><br> {% endcomment %}
-    <a class="btn btn-success" href="{% url 'addStudentEmployeeForm' %}">Add New Student Employee</a>
-    <a class="btn btn-success" href="{% url 'searchbyuid' %}">Edit Student Employee</a>
+    
     <div class="row">
         <div class="col-xl-3 col-md-6">
             <div class="card bg-primary text-white mb-4">
@@ -78,11 +77,13 @@
             </div>
         </div>
     </div>
+
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            DataTable Example
+            Student Records <a class="btn btn-success" style="float:right; margin-right:4px;" href="{% url 'addStudentEmployeeForm' %}">Add New</a> <a class="btn btn-success" style="float:right; margin-right:4px;" href="{% url 'searchbyuid' %}">Edit Student</a>
         </div>
+        
         <div class="card-body">
             <table id="datatablesSimple">
                 <thead>
