@@ -80,7 +80,7 @@
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            Student Records <a class="btn btn-success" style="float:right; margin-right:4px;" href="{% url 'addStudentEmployeeForm' %}">Add New</a> <a class="btn btn-success" style="float:right; margin-right:4px;" href="{% url 'searchbyuid' %}">Edit Student</a>
+            Student Records <a class="btn btn-success" style="float:right; margin-right:4px;" href="{% url 'addStudentEmployeeForm' %}">Add New</a> <a class="btn btn-success" style="float:right; margin-right:4px;" href="{% url 'searchbyuid' %}">Edit Student by ID</a>
         </div>
         
         <div class="card-body">
@@ -100,7 +100,7 @@
                 <tbody>
                     {% for x in studentRecords %}
                     <tr>
-                        <td><a class="btn btn-dark">View/Edit</a><a class="btn " style="background-color:#4E79A7; color: white" href="{% url 'addWorkAssignment' byuNumber=x.byu_id %}">Add Job Information</a></td>
+                        <td>{% comment %}<a class="btn btn-dark">View/Edit</a>{% endcomment %}<a class="btn " style="background-color:#4E79A7; color: white" href="{% url 'addWorkAssignment' byuNumber=x.byu_id %}">Add Job Information</a></td>
                         <td>{{ x.first_name }} {{x.last_name}}</td>
                         <td>{{x.byu_id}}</td>
                         <td>{{x.phone}}</td>
