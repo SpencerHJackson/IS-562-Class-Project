@@ -78,6 +78,43 @@ def storeStudentEmployeePageView(request):
       lastPayRaiseCleaned = None
     else:
       lastPayRaiseCleaned = request.POST.get('lastPayRaise')
+      
+
+
+    if request.POST.get('increase_input_date') == "":
+      inputRateIncrease = None
+    else:
+      inputRateIncrease = request.POST.get('increase_input_date')
+
+
+
+    if request.POST.get('authSent') == "":
+      authSentClean = None
+    else:
+      authSentClean = request.POST.get('authSent')
+
+
+
+    if request.POST.get('eformDate') == "":
+      eFormClean = None
+    else:
+      eFormClean = request.POST.get('eformDate')
+      
+
+
+    if request.POST.get('terminatedDate') == "":
+      TermDateCleaned = None
+    else:
+      TermDateCleaned = request.POST.get('terminatedDate')
+
+
+
+    if request.POST.get('payRateIncrease') == "":
+     payRateIncreaseCleaned = None
+    else:
+     payRateIncreaseCleaned = request.POST.get('payRateIncrease')
+
+
 
     new_employee=Student()
     new_employee.first_name = request.POST.get('inputFirstName')
@@ -96,18 +133,18 @@ def storeStudentEmployeePageView(request):
     new_employee.hire_date = request.POST.get('hireDate')
     new_employee.pay_rate = request.POST.get('payRate')
     new_employee.last_pay_increase = lastPayRaiseCleaned
-    new_employee.pay_increase_amount = request.POST.get('payRateIncrease')
-    new_employee.increase_input_date = request.POST.get('increase_input_date')
+    new_employee.pay_increase_amount = payRateIncreaseCleaned
+    new_employee.increase_input_date = inputRateIncrease
     sYear = request.POST.get('yearInProgram')
     new_employee.year_in_program = YearInProgram.objects.get(student_year=sYear)
     new_employee.pay_grad_tuition = request.POST.get('paidTuition')
     new_employee.is_terminated = request.POST.get('Terminated')
-    new_employee.terminated_date = request.POST.get('terminatedDate')
+    new_employee.terminated_date = TermDateCleaned
     new_employee.qualtrics_sent = request.POST.get('qualtrics')
     new_employee.eform = request.POST.get('eForm')
-    new_employee.eform_date = request.POST.get('eformDate')
+    new_employee.eform_date = eFormClean
     new_employee.workauth = request.POST.get('authorized')
-    new_employee.workauth_date = request.POST.get('authSent')
+    new_employee.workauth_date = authSentClean
     new_employee.expected_hours = request.POST.get('expected_hours')
     new_employee.name_change = request.POST.get('nameChange')
     new_employee.byu_name = request.POST.get('inputBYUName')
