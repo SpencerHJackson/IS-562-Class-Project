@@ -40,7 +40,7 @@
                       {% csrf_token %}
                       <div class="row mb-3">
                         <h3 class="text-center my-4">Student Personal Information</h3>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <div class="form-floating mb-3 mb-md-0">
                             <input
                               class="form-control"
@@ -52,7 +52,7 @@
                             <label for="inputFirstName">First name</label>
                           </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <div class="form-floating">
                             <input
                               class="form-control"
@@ -62,6 +62,18 @@
                               placeholder="Enter your last name"
                             />
                             <label for="inputLastName">Last name</label>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-floating mb-3 mb-md-0">
+                            <input
+                              class="form-control"
+                              id="inputBYUName"
+                              name="inputBYUName"
+                              type="text"
+                              placeholder="Name on BYU Records:"
+                            />
+                            <label for="inputBYUName">Name on BYU Records:</label>
                           </div>
                         </div>
                       </div>
@@ -95,53 +107,23 @@
                       </div>
                       <div class="row mb-3">
                         <div class="col-md-6">
-                          <h6 >International Student?</h6>
-                          <div class="form-check form-check-inline ">
+                          <div class="form-check">
                             <input
-                              class="form-check-input mx-auto"
-                              type="radio"
+                              class="form-check-input"
+                              type="checkbox"
+                              value="True"
                               name="international"
                               id="international"
-                              value="Yes"
                             />
-                            <label class="form-check-label" for="international"
-                              >Yes</label
-                            >
-                          </div>
-                          <div class="form-check form-check-inline text-center">
-                            <input
-                              class="form-check-input "
-                              type="radio"
-                              name="international"
-                              id="international"
-                              value="No"
-                            />
-                            <label class="form-check-label" for="international"
-                              >No</label
-                            >
+                            <label class="form-check-label" for="international">
+                              International Student?
+                            </label>
                           </div>
                         </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label for="semester">Select Semester</label>
-                            <select
-                            multiple
-                              name="semester"
-                              id="semester"
-                              class="form-control"
-                              style="width: 100%"
-                            >
-                            <option disabled selected value> -- select an option -- </option>
-                            {% for x in semester %}
-                            <option value="{{x}}">{{x}}</option>
-                  
-                    {% endfor %}
 
 
+                        </div>
                         
-                            </select>
-                          </div>
-                        </div>
                       </div>
                       
                       <div class="row mb-3">
@@ -198,38 +180,32 @@
                       </div>
                       <h3 class="text-center my-4">Student Employment Information</h3>
                       <div class="row mb-3">
-                        <div class="col-md-4">
+                        
+                        
+                        <div class="col-md-6">
                           <div class="form-group">
-                            <label for="classCode">Class Code</label>
-                            <select
-                              name="classCode"
-                              id="classCode"
-                              class="form-control"
-                              style="width: 100%"
-                            >
-                            <option disabled selected value> -- select an option -- </option>
-                            {% for x in univeristyClass %}
-                            <option value="{{x}}">{{x}}</option>
-                  
-                    {% endfor %}
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label for="employeeRecord">Employee Record</label>
-                            <input
-                              name="employeeRecord"
-                              id="employeeRecord"
-                              class="form-control"
-                              style="width: 100%"
-                              type="Number"
-                            >
-                            
-                          </input>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
+                              <label for="employeeRecord">
+                                Employee Record
+                              </label>
+                              <select
+                                name="employeeRecord"
+                                id="employeeRecord"
+                                class="form-control"
+                                style="width: 100%"
+                              >
+                              <option disabled selected value> -- select an option -- </option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">
+                                  3
+                                </option>
+                                <option value="Other">Other</option>
+                              </select>
+                            </div>
+                      </div>
+                       
+                        <div class="col-md-6">
                           <div class="form-floating mb-3 mb-md-0">
                             <input
                               class="form-control"
@@ -250,7 +226,8 @@
                               class="form-control"
                               name="payRate"
                               id="payRate"
-                              type="text"
+                              type="number"
+                              step=".01"
                               placeholder="payRate"
                             />
                             <label for="payRate">Pay Rate</label>
@@ -279,7 +256,8 @@
                               class="form-control"
                               name="payRateIncrease"
                               id="payRateIncrease"
-                              type="text"
+                              type="number"
+                              step=".01"
                               placeholder="payRateIncrease"
                             />
                             <label for="payRateIncrease"
@@ -287,37 +265,32 @@
                             >
                           </div>
                         </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="positionType">Select Position</label>
-                                <select
-                                  name="positionType"
-                                  id="positionType"
-                                  class="form-control"
-                                  style="width: 100%"
-                                >
-                                <option disabled selected value> -- select an option -- </option>
-                                  <option value="TA">TA</option>
-                                  <option value="RA">RA</option>
-                                  <option value="Office">Office</option>
-                                  <option value="Student Instructor">
-                                    Student Instructor
-                                  </option>
-                                  <option value="Other">Other</option>
-                                </select>
-                              </div>
+                          <div class="col-md-6">
+                            <div class="form-floating mb-3 mb-md-0">
+                              <input
+                                class="form-control"
+                                name="increase_input_date"
+                                id="increase_input_date"
+                                type="date"
+                                placeholder="increase_input_date"
+                              />
+                              <label for="increase_input_date"
+                                >Increase Input Date</label
+                              >
+                            </div>
+                          
                         </div>
-                      </div>
 
-                      <div class="row mb-3">
+                        
+                      <div class="row mt-3 mb-3">
                         <div class="col-md-4">
                           <div class="form-floating mb-3 mb-md-0">
                               <input
                                 class="form-control"
                                 name="expected_hours"
                                 id="expected_hours"
-                                type="text"
+                                type="number"
+                                step=".01"
                                 placeholder="expected_hours"
                               />
                               <label for="expected_hours">Expected Work Hours</label>
@@ -325,43 +298,31 @@
 
                         
                       </div>
-                        <div class="col-md-4">
-                          <h6>Paid Grad Tuition?</h6>
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="paidTuition"
-                              id="paidTuition"
-                              value="Yes"
-                            />
-                            <label class="form-check-label" for="paidTuition"
-                              >Yes</label
-                            >
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="paidTuition"
-                              id="paidTuition"
-                              value="No"
-                            />
-                            <label class="form-check-label" for="paidTuition"
-                              >No</label
-                            >
-                          </div>
+                      <div class="col-md-4">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value="True"
+                            name="paidTuition"
+                            id="namepaidTuitionChange"
+                          />
+                          <label class="form-check-label" for="paidTuition">
+                            Paid Grad Tuition?
+                          </label>
                         </div>
-                      
+                      </div>
+
+                        
                           
                       <div class="col-md-4">
                         <div class="form-check">
                           <input
                             class="form-check-input"
                             type="checkbox"
-                            value=""
-                            name="namechange"
-                            id="namechange"
+                            value="True"
+                            name="nameChange"
+                            id="nameChange"
                           />
                           <label class="form-check-label" for="namechange">
                             Name Change Completed?
@@ -376,8 +337,8 @@
                           <div class="form-check">
                             <input
                               class="form-check-input"
-                              type="authorized"
-                              value=""
+                              type="checkbox"
+                              value="True"
                               name="authorized"
                               id="authorized"
                             />
@@ -405,66 +366,72 @@
                     </div>
                       
                       <div class="row mb-6">
-                        <div class="col-md-6">
-                          <label>Qualtrics Survey Sent?</label>
-                          <div class="form-floating mb-3 mb-md-0">
-                            <select
-                              class="form-control"
-                              name="qualtrics"
-                              id="qualtrics"
-                              style="width: 100%"
-                        
-                            >
-                            <option disabled selected value> -- select an option -- </option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                          </select>
+                          <div class="col-md-4">
+                            <label>Qualtrics Survey Sent?</label>
+                            <div class="form-floating mb-3 mb-md-0">
+                              <select
+                                class="form-control"
+                                name="qualtrics"
+                                id="qualtrics"
+                                style="width: 100%"
+                          
+                              >
+                              <option disabled selected value> -- select an option -- </option>
+                              <option value="True">Yes</option>
+                              <option value="False">No</option>
+                            </select>
+                            </div>
                           </div>
-                        </div>
 
-                        <div class="col-md-6">
-                          <div class="form-check">
-                            <input
-                              class="form-check-input"
-                              type="checkbox"
-                              value=""
-                              name="eForm"
-                              id="eForm"
-                            />
-                            <label class="form-check-label" for="eForm">
-                              Submitted E-Form
-                            </label>
+                          <div class="col-md-4">
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  value="True"
+                                  name="eForm"
+                                  id="eForm"
+                                />
+                                <label class="form-check-label" for="eForm">
+                                  Submitted E-Form
+                                </label>
+                              </div>
                           </div>
+                          <div class="col-md-4">
+                            <div class="form-floating mb-3 mb-md-0">
+                              <input
+                                class="form-control"
+                                name="eformDate"
+                                id="eformDate"
+                                type="date"
+                                placeholder="eformDate"
+                              />
+                              <label for="eformDate"
+                                >E-form Date Sent</label
+                              >
+                            </div>
+                            </div>
                         </div>
                         <h4 class="text-center my-4">Termination Details</h4>
                         <div class="row mb-3">
-                            <div class="col-md-6">
-                              <h6>Are they Terminated?</h6>
-                              <div class="form-check form-check-inline">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="Terminated"
-                                  id="Terminated"
-                                  value="Yes"
-                                />
-                                <label class="form-check-label" for="Terminated"
-                                  >Yes</label
-                                >
-                              </div>
-                              <div class="form-check form-check-inline">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="Terminated"
-                                  id="Terminated"
-                                  value="No"
-                                />
-                                <label class="form-check-label" for="Terminated"
-                                  >No</label
-                                >
-                              </div>
+
+                          <div class="col-md-6">
+                            <div class="form-check">
+                              <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value="True"
+                                name="Terminated"
+                                id="Terminated"
+                              />
+                              <label class="form-check-label" for="Terminated">
+                                Are they Terminated?
+                              </label>
                             </div>
+                          </div>
+
+
+                    
     
                             <div class="col-md-6">
                               <div class="form-floating mb-3 mb-md-0">
