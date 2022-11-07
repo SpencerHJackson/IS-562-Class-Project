@@ -32,7 +32,7 @@
               <div class="col-lg-7">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                   <div class="card-header">
-                    <h3 class="text-center font-weight-light my-4">Add User</h3>
+                    <h3 class="text-center font-weight-light my-4">Edit User</h3>
                   </div>
                   <div class="card-body">
 
@@ -89,7 +89,7 @@
                                   id="phoneNumber"
                                   type="text"
                                   placeholder="Phone Number"
-                                  value ={{phone}}
+                                  value ={{ phone }}
                                 />
                                 <label for="phoneNumber">Phone Number</label>
                               </div>
@@ -99,7 +99,7 @@
                       </div>
                       <div class="row mb-3">
                         <div class="col-md-6">
-                          {% if international == 1%}
+                          {% if international_student == 1%}
                           <h6 >International Student?</h6>
                           <div class="form-check form-check-inline ">
                             <input
@@ -107,7 +107,7 @@
                               type="radio"
                               name="international"
                               id="international"
-                              value="Yes"
+                              value="1"
                               checked
                             />
                             <label class="form-check-label" for="international"
@@ -120,7 +120,7 @@
                               type="radio"
                               name="international"
                               id="international"
-                              value="No"
+                              value="0"
                             />
                             <label class="form-check-label" for="international"
                               >No</label
@@ -134,7 +134,7 @@
                               type="radio"
                               name="international"
                               id="international"
-                              value="Yes"
+                              value="1"
                             />
                             <label class="form-check-label" for="international"
                               >Yes</label
@@ -146,7 +146,7 @@
                               type="radio"
                               name="international"
                               id="international"
-                              value="No"
+                              value="0"
                               checked
                             />
                             <label class="form-check-label" for="international"
@@ -176,7 +176,7 @@
                       </div>
                       <div class="row mb-3">
                         <div class="col-md-6">
-                          <div class="form-group">
+                          {% comment %} <div class="form-group">
                             <label for="year">Select Year</label>
                             <select
                               name="year"
@@ -190,7 +190,7 @@
                               <option value="2020" {%if calendaryear == '2020'%} selected{%endif%}>2020</option>
                               <option value="2019" {%if calendaryear == '2019'%} selected{%endif%}>2019</option>
                             </select>
-                          </div>
+                          </div> {% endcomment %}
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -218,7 +218,7 @@
                               name="BYUID"
                               type="text"
                               placeholder="Phone Number"
-                              value={{byuid}}
+                              value={{byu_id}}
                             />
                             <label for="BYUID">BYU ID</label>
                           </div>
@@ -236,12 +236,12 @@
                                   style="width: 100%"
                                 >
                                 <option value='' {% if yearinprogram == '' %}selected{%endif%}> -- select an option -- </option>
-                                  <option value="MSBCore" {%if yearinprogram == 'MSBCore'%} selected {%endif%}>MSB Core (IS or other)</option>
-                                  <option value="MISM" {%if yearinprogram == 'MISM'%} selected {%endif%}>MISM</option>
-                                  <option value="MBA" {%if yearinprogram == 'MBA'%} selected {%endif%}>MBA</option>
-                                  <option value="MPA" {%if yearinprogram == 'MPA'%} selected {%endif%}>MPA</option>
-                                  <option value="Macc" {%if yearinprogram == 'Macc'%} selected {%endif%}>Macc</option>
-                                  <option value="Other"{%if yearinprogram == 'Other'%} selected {%endif%}>
+                                  <option value="MSBCore" {%if year_in_program_id == 'MSBCore'%} selected {%endif%}>MSB Core (IS or other)</option>
+                                  <option value="MISM" {%if year_in_program_id == 'MISM'%} selected {%endif%}>MISM</option>
+                                  <option value="MBA" {%if year_in_program_id == 'MBA'%} selected {%endif%}>MBA</option>
+                                  <option value="MPA" {%if year_in_program_id == 'MPA'%} selected {%endif%}>MPA</option>
+                                  <option value="Macc" {%if year_in_program_id == 'Macc'%} selected {%endif%}>Macc</option>
+                                  <option value="Other"{%if year_in_program_id == 'Other'%} selected {%endif%}>
                                     Other majors on campus
                                   </option>
                                 </select>
@@ -278,10 +278,10 @@
                               style="width: 100%"
                             >
                             <option value='' {% if employee_record == '' %}selected{%endif%}> -- select an option -- </option>
-                              <option value="0" {%if employee_record == '0'%} selected {%endif%}>0</option>
-                              <option value="1" {%if employee_record == '1'%} selected {%endif%}>1</option>
-                              <option value="2" {%if employee_record == '2'%} selected {%endif%}>2</option>
-                              <option value="3" {%if employee_record == '3'%} selected {%endif%}>3</option>
+                              <option value="0" {%if employee_record == 0%} selected {%endif%}>0</option>
+                              <option value="1" {%if employee_record == 1%} selected {%endif%}>1</option>
+                              <option value="2" {%if employee_record == 2%} selected {%endif%}>2</option>
+                              <option value="3" {%if employee_record == 3%} selected {%endif%}>3</option>
                             </select>
                           </div>
                         </div>
@@ -293,7 +293,7 @@
                               id="hireDate"
                               type="date"
                               placeholder="Hire Date"
-                              value= {{hiredate}}
+                              value= {{hire_date}}
                             />
                             <label for="hireDate">Hire Date</label>
                           </div>
@@ -309,7 +309,7 @@
                               id="payRate"
                               type="text"
                               placeholder="payRate"
-                              value={{payrate}}
+                              value={{pay_rate}}
                             />
                             <label for="payRate">Pay Rate</label>
                           </div>
@@ -322,7 +322,7 @@
                               id="lastPayRaise"
                               type="date"
                               placeholder="lastPayRaise"
-                              value={{lastpayincrease}}
+                              value={{last_pay_increase}}
                             />
                             <label for="lastPayRaise"
                               >Last Pay Rate Increase</label
@@ -340,7 +340,7 @@
                               id="payRateIncrease"
                               type="text"
                               placeholder="payRateIncrease"
-                              value={{payincreaseamount}}
+                              value={{pay_increase_amount}}
                             />
                             <label for="payRateIncrease"
                               >Pay increase amount ($)</label
@@ -357,11 +357,11 @@
                                   class="form-control"
                                   style="width: 100%"
                                 >
-                                <option value='' {% if position == '' %}selected{%endif%}> -- select an option -- </option>
-                                  <option value="TA" {%if position == 'TA'%} selected {%endif%}>TA</option>
-                                  <option value="RA" {%if position == 'RA'%} selected {%endif%}>RA</option>
-                                  <option value="Office" {%if position == 'Office'%} selected {%endif%}>Office</option>
-                                  <option value="Student Instructor" {%if position == 'Student Instructor'%} selected {%endif%}>
+                                <option value='' {% if position_id == '' %}selected{%endif%}> -- select an option -- </option>
+                                  <option value="TA" {%if position_id == 'TA'%} selected {%endif%}>TA</option>
+                                  <option value="RA" {%if position_id == 'RA'%} selected {%endif%}>RA</option>
+                                  <option value="Office" {%if position_id == 'Office'%} selected {%endif%}>Office</option>
+                                  <option value="Student Instructor" {%if position_id == 'Student Instructor'%} selected {%endif%}>
                                     Student Instructor
                                   </option>
                                   <option value="Other" {%if position == 'Other'%} selected {%endif%}>Other</option>
@@ -380,7 +380,7 @@
                               name="paidTuition"
                               id="paidTuition"
                               value="1"
-                              {%if paygradtuition == 1%} checked {%endif%}
+                              {%if pay_grad_tuition == 1%} checked {%endif%}
                             />
                             <label class="form-check-label" for="paidTuition"
                               >Yes</label
@@ -393,7 +393,7 @@
                               name="paidTuition"
                               id="paidTuition"
                               value="0"
-                              {%if paygradtuition == 0%} checked {%endif%}
+                              {%if pay_grad_tuition == 0%} checked {%endif%}
                             />
                             <label class="form-check-label" for="paidTuition"
                               >No</label
@@ -404,13 +404,32 @@
                           
                       <div class="col-md-6">
                         <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="namechange"
-                            value=""
-                            name="namechange"
-                            id="namechange"
-                          />
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="namechange"
+                              id="namechange"
+                              value="1"
+                              {%if name_change == 1%} checked {%endif%}
+                            />
+                            <label class="form-check-label" for="namechange"
+                              >Yes</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="namechange"
+                              id="namechange"
+                              value="0"
+                              {%if name_change == 0%} checked {%endif%}
+                            />
+                            <label class="form-check-label" for="namechange"
+                              >No</label
+                            >
+                          </div>
                           <label class="form-check-label" for="namechange">
                             Name Change Completed?
                           </label>
@@ -462,7 +481,7 @@
                               id="authSent"
                               type="date"
                               placeholder="authSent"
-                              value={{workauthdate}}
+                              value={{workauth_date}}
                             />
                             <label for="authSent"
                               >Authorized Date</label
@@ -532,7 +551,7 @@
                                 name="Terminated"
                                 id="Terminated"
                                 value="1"
-                                {%if isterminated == 1%} checked {%endif%}
+                                {%if is_terminated == 1%} checked {%endif%}
                               />
                               <label class="form-check-label" for="Terminated"
                                 >Yes</label
@@ -545,7 +564,7 @@
                                 name="Terminated"
                                 id="Terminated"
                                 value="0"
-                                {%if isterminated == 0%} checked {%endif%}
+                                {%if is_terminated == 0%} checked {%endif%}
                               />
                               <label class="form-check-label" for="Terminated"
                                 >No</label
@@ -561,7 +580,7 @@
                                 id="terminatedDate"
                                 type="date"
                                 placeholder="terminatedDate"
-                                value={{terminateddate}}
+                                value={{terminated_date}}
                               />
                               <label for="terminatedDate">Termination Date</label>
                             </div>
