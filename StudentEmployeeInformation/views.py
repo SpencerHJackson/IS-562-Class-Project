@@ -271,6 +271,8 @@ def save_record(request):
   target_record.workauth_date = request.POST.get('authSent')
   target_record.expected_hours = request.POST.get('expected_hours')
   target_record.increase_input_date = request.POST.get('increase_input_date')
+  sYear = request.POST.get('yearInProgram')
+  target_record.year_in_program = YearInProgram.objects.get(id=sYear)
 # Some of these are off. We need to verify the fields we are entering are correct
   target_record.save()
   text={}
