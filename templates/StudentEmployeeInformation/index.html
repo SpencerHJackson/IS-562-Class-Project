@@ -4,37 +4,56 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<script>
 
-    
-    function download_csv_file() {  
+{{ loadcsv1|json_script:"load-csv1" }}
+{{ loadcsv2|json_script:"load-csv2" }}
+{{ loadcsv3|json_script:"load-csv3" }}
+
+<script>
   
-        //define the heading for each row of the data  
-        var csv = 'first_name, last_name, internation_student, gender, email, phone, byu_id, employee_record, hire_date, pay_rate, last_pay_increase, pay_increase_amount, increase_input_date\n';   
-        
-        
-        csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
-        csv += "jane,timothy,yes,female,jane892@gmail.com,9101099111,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
-        csv += "william,spencer,yes,male,william1010@gmail.com,1293111,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
-        csv += "tom,yorg,yes,male,tom9101@gmail.com,9891913840,1235466,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
-        csv += "freddie,aldous,yes,male,freddie91012@gmail.com,182993003,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
-        csv += "tim,smith,yes,male,tim1022@gmail.com,9891913840,19293800502,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
-        csv += "betty,franklin,yes,female,betty11212@gmail.com,9891913840,128339944,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
-        csv += "becks,bees,yes,female,becks300392@gmail.com,9891913840,129340053,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
-        csv += "chad,millet,yes,male,chad231@gmail.com,9891913840,1293490032,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
-        csv += "luke,figgins,yes,male,luke1111@gmail.com,9891913840,1293004032,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
-        csv += "josh,christensen,yes,male,josh888@gmail.com,9891913840,128304030,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
-        csv += "sam,brown,yes,male,sam1223@gmail.com,9891913840,59900434,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
-        csv += "fan,marshall,yes,female,fanfan@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
+    function download_csv_file1() {  
+
+        const csv1 = JSON.parse(document.getElementById('load-csv1').textContent);
+
+        console.log(csv1)
 
         var hiddenElement = document.createElement('a');  
-        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);  
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv1);  
         hiddenElement.target = '_blank';  
           
         //provide the name for the CSV file to be downloaded  
         hiddenElement.download = 'Student Employees.csv';  
         hiddenElement.click();  
     }
+    function download_csv_file2() {  
+
+        const csv2 = JSON.parse(document.getElementById('load-csv2').textContent);
+
+        console.log(csv2)
+
+        var hiddenElement = document.createElement('a');  
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv2);  
+        hiddenElement.target = '_blank';  
+          
+        //provide the name for the CSV file to be downloaded  
+        hiddenElement.download = 'Student Employees.csv';  
+        hiddenElement.click();  
+    }
+    function download_csv_file3() {  
+
+        const csv3 = JSON.parse(document.getElementById('load-csv3').textContent);
+
+        console.log(csv3)
+
+        var hiddenElement = document.createElement('a');  
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv3);  
+        hiddenElement.target = '_blank';  
+          
+        //provide the name for the CSV file to be downloaded  
+        hiddenElement.download = 'Student Employees.csv';  
+        hiddenElement.click();  
+    }
+
     
 </script>
 
@@ -150,9 +169,10 @@
     </div>
     <div>
         <h3>Download Employee Data CSVs</h3>
-        <button class="btn btn-success" onclick="download_csv_file()">Employee by Supervisor</button>
-        <button class="btn btn-success" onclick="download_csv_file()">Employee by Semester</button>
-        <button class="btn btn-success" onclick="download_csv_file()">All Employees</button>
+        <button class="btn btn-success" onclick='download_csv_file1()'>Employee by Supervisor</button>
+        <button class="btn btn-success" onclick='download_csv_file2()'>Employees in Current Semester</button>
+        <button class="btn btn-success" onclick='download_csv_file3()'>All Employees</button>
+
     </div>
 
 </div>

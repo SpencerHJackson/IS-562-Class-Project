@@ -12,27 +12,53 @@ from StudentEmployeeInformation.models import Student, Semester, YearInProgram, 
 # Create your views here.
 def indexPageView(request):
   csv = 'first_name, last_name, internation_student, gender, email, phone, byu_id, position_id, employee_record, supervisor_id, hire_date, pay_rate, last_pay_increase, pay_increase_amount, increase_input_date\n';   
+  csv2 = 'first_name, last_name, internation_student, gender, email, phone, byu_id, position_id, employee_record, supervisor_id, hire_date, pay_rate, last_pay_increase, pay_increase_amount, increase_input_date\n';  
+  csv3 = 'first_name, last_name, internation_student, gender, email, phone, byu_id, position_id, employee_record, supervisor_id, hire_date, pay_rate, last_pay_increase, pay_increase_amount, increase_input_date\n';   
+ 
   mydb = mysql.connector.connect(host="rds-terraform.ccme3kf5lctp.us-east-2.rds.amazonaws.com", user="admin", password="is562section2classproject", database="BYUIS")
-  query = "select * from student_employee"
+  query = "select * from student_employee "
   # df_query = pd.read_sql(query, mydb)
   cursor = mydb.cursor(prepared=True)
   cursor.execute(query)
   records = cursor.fetchall()
-  small_array = []
   
   # cursor = mydb.cursor(prepared=True)
-  print(len(records))
   for row in records:
-    print(row)
-      # small_array.append(row[0])
-      # row = small_array.join(",")
-      # csv += row + "\r\n"
+    csv += row[0] + ", " + row[1] + ', ' + str(row[2]) + ', ' + str(row[3]) + ', ' + str(row[4]) + ', ' + str(row[5]) + ', ' + str(row[6]) + ', ' + str(row[7]) + ', ' + str(row[8]) + ', ' + str(row[9]) + ', ' + str(row[10]) + ', ' + str(row[11]) + ', ' + str(row[12]) + ', ' + str(row[13]) + ", " + str(row[14]) + ", " + str(row[15]) + ", " + str(row[16]) + ", " + str(row[17]) + ", " + str(row[18]) + ", " + str(row[19]) + ", " + str(row[20]) + ", " + str(row[21]) + ", " + str(row[22]) + ", " + str(row[23]) + ", " + str(row[24]) + ", " + str(row[25]) + "\r\n"
+  
+  csvfixed = str(csv)
+
+  query2 = "select * from student_employee where is_terminated is false"
+  # df_query = pd.read_sql(query, mydb)
+  cursor2 = mydb.cursor(prepared=True)
+  cursor2.execute(query2)
+  records2 = cursor2.fetchall()
+
+  for row in records2:
+    csv2 += row[0] + ", " + row[1] + ', ' + str(row[2]) + ', ' + str(row[3]) + ', ' + str(row[4]) + ', ' + str(row[5]) + ', ' + str(row[6]) + ', ' + str(row[7]) + ', ' + str(row[8]) + ', ' + str(row[9]) + ', ' + str(row[10]) + ', ' + str(row[11]) + ', ' + str(row[12]) + ', ' + str(row[13]) + ", " + str(row[14]) + ", " + str(row[15]) + ", " + str(row[16]) + ", " + str(row[17]) + ", " + str(row[18]) + ", " + str(row[19]) + ", " + str(row[20]) + ", " + str(row[21]) + ", " + str(row[22]) + ", " + str(row[23]) + ", " + str(row[24]) + ", " + str(row[25]) + "\r\n"
+
+  csvfixed2 = str(csv2)
+
+  query3 = "select * from student_employee"
+  # df_query = pd.read_sql(query, mydb)
+  cursor3 = mydb.cursor(prepared=True)
+  cursor3.execute(query3)
+  records3 = cursor3.fetchall()
+
+  for row in records3:
+    csv3 += row[0] + ", " + row[1] + ', ' + str(row[2]) + ', ' + str(row[3]) + ', ' + str(row[4]) + ', ' + str(row[5]) + ', ' + str(row[6]) + ', ' + str(row[7]) + ', ' + str(row[8]) + ', ' + str(row[9]) + ', ' + str(row[10]) + ', ' + str(row[11]) + ', ' + str(row[12]) + ', ' + str(row[13]) + ", " + str(row[14]) + ", " + str(row[15]) + ", " + str(row[16]) + ", " + str(row[17]) + ", " + str(row[18]) + ", " + str(row[19]) + ", " + str(row[20]) + ", " + str(row[21]) + ", " + str(row[22]) + ", " + str(row[23]) + ", " + str(row[24]) + ", " + str(row[25]) + "\r\n"
+
+  csvfixed3 = str(csv3)
 
   studentRecords = Student.objects.all()
   
 
+
   context = {
     'studentRecords' : studentRecords,
+    'loadcsv1' : csvfixed, 
+    'loadcsv2' : csvfixed2,
+    'loadcsv3' : csvfixed3
   }
 
   return render(request, 'StudentEmployeeInformation/index.html', context)
