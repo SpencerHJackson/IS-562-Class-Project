@@ -77,6 +77,8 @@ def addStudentEmployeeFormPageView(request):
   return render(request, 'StudentEmployeeInformation/add-user.html', context)
 
 def addWorkAssignmentView(request, byuNumber):
+
+
   semester = Semester.objects.all()
   univeristyClass = UniveristyClass.objects.all()
   position = StudentEmployeePosition.objects.all()
@@ -99,11 +101,17 @@ def storeWorkAssignment(request):
     byuIDNumber = request.POST.get('BYUID')
     student = Student.objects.get(byu_id=byuIDNumber)
 
+
     new_assignment=StudentAssignment()
+    
+    if request.POST.get('classCode') == None:
+      new_assignment.class_code = None
+    else:
+      classID = request.POST.get('classCode')
+      new_assignment.class_code = UniveristyClass.objects.get(id=classID)
+
     semesterID = request.POST.get('semester')
     new_assignment.semester = Semester.objects.get(id=semesterID)
-    classID = request.POST.get('classCode')
-    new_assignment.class_code = UniveristyClass.objects.get(id=classID)
     positionID = request.POST.get('positionType')
     new_assignment.position = StudentEmployeePosition.objects.get(id=positionID)
     supervisorID = request.POST.get('supervisor')
