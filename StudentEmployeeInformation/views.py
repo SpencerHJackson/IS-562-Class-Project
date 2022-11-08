@@ -6,12 +6,30 @@ from django.shortcuts import render, redirect
 import mysql.connector
 import pandas as pd
 
+
 from StudentEmployeeInformation.models import Student, Semester, YearInProgram, UniveristyClass, StudentEmployeePosition, ISStaffMember, StudentAssignment
 
 # Create your views here.
 def indexPageView(request):
+  csv = 'first_name, last_name, internation_student, gender, email, phone, byu_id, position_id, employee_record, supervisor_id, hire_date, pay_rate, last_pay_increase, pay_increase_amount, increase_input_date\n';   
+  mydb = mysql.connector.connect(host="rds-terraform.ccme3kf5lctp.us-east-2.rds.amazonaws.com", user="admin", password="is562section2classproject", database="BYUIS")
+  query = "select * from student_employee"
+  # df_query = pd.read_sql(query, mydb)
+  cursor = mydb.cursor(prepared=True)
+  cursor.execute(query)
+  records = cursor.fetchall()
+  small_array = []
+  
+  # cursor = mydb.cursor(prepared=True)
+  print(len(records))
+  for row in records:
+    print(row)
+      # small_array.append(row[0])
+      # row = small_array.join(",")
+      # csv += row + "\r\n"
 
   studentRecords = Student.objects.all()
+  
 
   context = {
     'studentRecords' : studentRecords,

@@ -5,12 +5,13 @@
 
 {% block content %}
 <script>
+
+    
     function download_csv_file() {  
   
         //define the heading for each row of the data  
         var csv = 'first_name, last_name, internation_student, gender, email, phone, byu_id, employee_record, hire_date, pay_rate, last_pay_increase, pay_increase_amount, increase_input_date\n';   
         
-        "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08"
         
         csv += "joe,johnson,yes,male,shyrumj@gmail.com,9891913840,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
         csv += "jane,timothy,yes,female,jane892@gmail.com,9101099111,822802921,1,3,3,2022-11-01,15.68,2022-11-01,5.26,2022-11-08" + "\r\n"
