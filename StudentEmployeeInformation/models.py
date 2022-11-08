@@ -120,9 +120,11 @@ class Student(models.Model):
     def work_assignments_list(self):
 
         sAllWorkAssignments = ""
+        pos = -1
         for studentAssignment in self.work_assignments.all():
+            pos += 1
             sAllWorkAssignments = sAllWorkAssignments + str(studentAssignment)
-            if studentAssignment != self.work_assignments.last():
+            if pos != self.work_assignments.count() - 1:
                 sAllWorkAssignments = sAllWorkAssignments + " /  "
 
         return(sAllWorkAssignments)
