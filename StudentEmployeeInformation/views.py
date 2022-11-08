@@ -200,6 +200,8 @@ def storeStudentEmployeePageView(request):
     new_employee.expected_hours = request.POST.get('expected_hours')
     new_employee.name_change = request.POST.get('nameChange')
     new_employee.byu_name = request.POST.get('inputBYUName')
+    new_employee.notes = request.POST.get('notes')
+
 
 # Some of these are off. We need to verify the fields we are entering are correct
     new_employee.save()
@@ -265,6 +267,9 @@ def edit_record(request):
       target_record['year_in_program_id'] = 'Other Major'
     else:
       target_record['year_in_program_id'] = ''
+    
+    target_record['notes'] = '' if target_record['gender'] is None else target_record['gender'] 
+
 
     return render(request, 'StudentEmployeeInformation/edit-user.html', target_record)
 
@@ -296,10 +301,13 @@ def save_record(request):
   target_record.eform_date = request.POST.get('eformDate')
   sYear = request.POST.get('yearInProgram')
   target_record.year_in_program = YearInProgram.objects.get(id=sYear)
+  target_record.notes = request.POST.get('notes')
+
 # Some of these are off. We need to verify the fields we are entering are correct
   target_record.save()
   text={}
   text['alert'] = 'Update success!' 
+  
   return render(request, 'StudentEmployeeInformation/search_byuid.html', text)
 
 
