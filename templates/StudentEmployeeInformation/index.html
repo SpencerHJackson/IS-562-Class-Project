@@ -160,7 +160,11 @@
                         <td>{{x.email}}</td>
                         <td>{{x.hire_date}}</td>
                         <td>{{x.pay_rate}}</td>
-                        <td>{{x.work_assignments_list}}</td>
+                        <td>
+                            {% for assignment in x.work_assignments_list %}
+                                <h6><span class="badge bg-success">{{assignment}}</span></h6>
+                            {% endfor %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
