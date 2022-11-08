@@ -184,7 +184,7 @@ def storeStudentEmployeePageView(request):
     new_employee.pay_grad_tuition = request.POST.get('paidTuition')
     new_employee.is_terminated = request.POST.get('Terminated')
     new_employee.terminated_date = TermDateCleaned
-    new_employee.qualtrics_sent = request.POST.get('qualtrics')
+    new_employee.qualtrics_sent = request.POST.get('qualtricssent')
     new_employee.eform = request.POST.get('eForm')
     new_employee.eform_date = eFormClean
     new_employee.workauth = request.POST.get('authorized')
@@ -244,18 +244,6 @@ def edit_record(request):
     target_record['terminated_date'] = str(target_record['terminated_date']) if target_record['terminated_date'] is not None else '0001-01-01'
     target_record['gender'] = '' if target_record['gender'] is None else target_record['gender'] 
     target_record['employee_record'] = '' if target_record['employee_record'] is None else target_record['employee_record']
-    if target_record['position_id'] == 1:
-      target_record['position_id'] = 'TA'
-    elif target_record['position_id'] == 2:
-      target_record['position_id'] = 'RA'
-    elif target_record['position_id'] == 3:
-      target_record['position_id'] = 'Office'
-    elif target_record['position_id'] == 4:
-      target_record['position_id'] = 'Student Instructor'
-    elif target_record['position_id'] == 5:
-      target_record['position_id'] = 'Other'
-    else:
-      target_record['position_id'] = ''
     
     if target_record['year_in_program_id'] == 1:
       target_record['year_in_program_id'] = 'MISM'
@@ -297,6 +285,7 @@ def save_record(request):
   target_record.workauth_date = request.POST.get('authSent')
   target_record.expected_hours = request.POST.get('expected_hours')
   target_record.increase_input_date = request.POST.get('increase_input_date')
+  target_record.eform_date = request.POST.get('eformDate')
   sYear = request.POST.get('yearInProgram')
   target_record.year_in_program = YearInProgram.objects.get(id=sYear)
 # Some of these are off. We need to verify the fields we are entering are correct
