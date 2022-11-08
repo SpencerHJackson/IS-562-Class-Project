@@ -11,12 +11,12 @@ from StudentEmployeeInformation.models import Student, Semester, YearInProgram, 
 
 # Create your views here.
 def indexPageView(request):
-  csv = 'first_name, last_name, internation_student, gender, email, phone, byu_id, position_id, employee_record, supervisor_id, hire_date, pay_rate, last_pay_increase, pay_increase_amount, increase_input_date\n';   
+  csv = 'teacher_first, teacher_last, student_first, spencer_last, internation_student, gender, email, phone, byu_id, position_id, employee_record, supervisor_id, hire_date, pay_rate, last_pay_increase, pay_increase_amount, increase_input_date\n';   
   csv2 = 'first_name, last_name, internation_student, gender, email, phone, byu_id, position_id, employee_record, supervisor_id, hire_date, pay_rate, last_pay_increase, pay_increase_amount, increase_input_date\n';  
   csv3 = 'first_name, last_name, internation_student, gender, email, phone, byu_id, position_id, employee_record, supervisor_id, hire_date, pay_rate, last_pay_increase, pay_increase_amount, increase_input_date\n';   
  
   mydb = mysql.connector.connect(host="rds-terraform.ccme3kf5lctp.us-east-2.rds.amazonaws.com", user="admin", password="is562section2classproject", database="BYUIS")
-  query = "select * from student_employee "
+  query = "select is_staff.first_name, is_staff.last_name, student_employee.* from is_staff inner join student_assignment on is_staff.id = student_assignment.supervisor_id  inner join student_employee_work_assignments on student_assignment.id = student_employee_work_assignments.studentassignment_id inner join student_employee on student_employee_work_assignments.student_id = student_employee.byu_id where is_terminated is false order by supervisor_id"
   # df_query = pd.read_sql(query, mydb)
   cursor = mydb.cursor(prepared=True)
   cursor.execute(query)
