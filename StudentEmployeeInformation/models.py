@@ -78,7 +78,10 @@ class StudentAssignment(models.Model):
         ordering = ['semester']
 
     def __str__(self):
-        return(str(self.semester) + " - " + str(self.position) + " - " + str(self.supervisor))
+        if self.class_code:
+            return(str(self.semester) + " - " + str(self.position) + " - " + str(self.supervisor) + " - " + str(self.class_code))
+        else:
+            return(str(self.semester) + " - " + str(self.position) + " - " + str(self.supervisor))
 
 class Student(models.Model):
     first_name = models.CharField(max_length=255, blank=True, null=True)
@@ -119,12 +122,15 @@ class Student(models.Model):
     @property
     def work_assignments_list(self):
 
-        sAllWorkAssignments = ""
-        pos = -1
+        # sAllWorkAssignments = ""
+        # pos = -1
+        # for studentAssignment in self.work_assignments.all():
+        #     pos += 1
+        #     sAllWorkAssignments = sAllWorkAssignments + str(studentAssignment)
+        #     if pos != self.work_assignments.count() - 1:
+        #         sAllWorkAssignments = sAllWorkAssignments + " /  "
+        listOfAssignments = []
         for studentAssignment in self.work_assignments.all():
-            pos += 1
-            sAllWorkAssignments = sAllWorkAssignments + str(studentAssignment)
-            if pos != self.work_assignments.count() - 1:
-                sAllWorkAssignments = sAllWorkAssignments + " /  "
+            listOfAssignments.append(studentAssignment)
 
-        return(sAllWorkAssignments)
+        return(listOfAssignments)
